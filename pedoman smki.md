@@ -154,7 +154,7 @@
 
 [5.5.1.4 Pengendalian Akses Internet dan Konten](#5.5.1.4-pengendalian-akses-internet-dan-konten)
 
-[5.5.2 Keamanan Sistem Penghubung Layanan  (Annex  A8.20-8.23)](#5.5.2-keamanan-sistem-penghubung-layanan-\(annex-a8.20-8.23\))
+[5.6.3 Keamanan Integrasi dan API (Sistem Penghubung Layanan)](#5.6.3-keamanan-integrasi-dan-api)
 
 [5.6 Keamanan Aplikasi Web dan Mobile (Annex A 8.28–8.34)](#5.6-keamanan-aplikasi-web-dan-mobile-\(annex-a-8.28–8.34\))
 
@@ -324,34 +324,55 @@ Pedoman ini berlaku untuk:
 ### **1.5 Istilah dan Definisi** {#1.5-istilah-dan-definisi}
 
 1. **SPBE (Sistem Pemerintahan Berbasis Elektronik):** Penyelenggaraan pemerintahan yang memanfaatkan teknologi informasi dan komunikasi untuk layanan publik serta tata kelola pemerintahan yang transparan, efisien, dan akuntabel.  
-2. **Aset Informasi:** Segala bentuk data, perangkat keras, perangkat lunak, maupun sumber daya manusia yang memiliki nilai bagi penyelenggaraan SPBE.  
-3. **Ancaman, Kerentanan, dan Risiko:** Ancaman (*threat*) adalah potensi penyebab insiden yang merugikan; Kerentanan (*vulnerability*) adalah kelemahan yang dapat dieksploitasi; Risiko (*risk*) adalah kemungkinan insiden akibat ancaman dan kerentanan.  
-4. **Insiden Keamanan Informasi:** Kejadian yang mengganggu ketersediaan, keutuhan, atau kerahasiaan informasi, misalnya peretasan, kebocoran data, atau gangguan layanan.  
-5. **Data Pribadi:** Data tentang seseorang yang teridentifikasi atau dapat diidentifikasi, baik secara langsung maupun tidak langsung, tersendiri maupun dikombinasikan dengan informasi lain.  
-6. **Subjek Data Pribadi:** Orang perseorangan yang data pribadinya dikumpulkan, digunakan, atau dikelola oleh pengendali data.  
-7. **Pengendali Data Pribadi (*Data Controller*):** Pihak yang menentukan tujuan dan berwenang mengendalikan pemrosesan data pribadi (dalam hal ini Pemerintah Kota Mojokerto).  
-8. **Prosesor Data Pribadi (*Data Processor*):** Pihak yang memproses data pribadi atas nama pengendali, dapat berupa unit internal (UPTD TIK) atau pihak ketiga (vendor).  
-9. **Business Continuity Plan (BCP):** Rencana kelangsungan layanan agar proses bisnis pemerintahan tetap berjalan meskipun terjadi insiden besar.  
-10. **Disaster Recovery Plan (DRP):** Rencana pemulihan sistem dan infrastruktur TIK setelah bencana/insiden, agar layanan kembali normal sesuai waktu yang ditentukan.  
-11. **Secure Software Development Life Cycle (SSDLC):** Metodologi pengembangan aplikasi dengan prinsip keamanan di setiap tahap (perencanaan hingga pemeliharaan).  
-12. **Zero Trust Security / Zero Trust Network Access (ZTNA):** Metodologi keamanan yang mengasumsikan tidak ada pengguna/perangkat yang dapat dipercaya sehingga setiap akses harus dilakukan proses verifikasi.  
-13. **Penilaian Kerentanan (*Vulnerability Assessment*):** Identifikasi dan evaluasi kelemahan pada sistem informasi, aplikasi, maupun infrastruktur TIK.  
-14. **Uji Penetrasi (*Penetration Testing / Pentest*):** Simulasi serangan siber terkontrol untuk menguji sejauh mana sistem/aplikasi/jaringan dapat ditembus.  
-15. **Hardening Sistem:** Penguatan konfigurasi perangkat keras, perangkat lunak, dan sistem operasi untuk menutup celah keamanan.  
-16. **Security Information and Event Management (SIEM):** Sistem yang mengumpulkan dan menganalisis log dari berbagai perangkat untuk mendeteksi insiden keamanan.  
-17. **Endpoint:** Perangkat pengguna yang terhubung ke jaringan, seperti laptop, desktop, smartphone, atau tablet.  
-18. **Phishing:** Teknik penipuan siber untuk memperoleh informasi sensitif dengan menyamar sebagai pihak terpercaya.  
-19. **Ransomware:** Malware yang mengenkripsi data korban dan meminta tebusan agar data dipulihkan.  
-20. **Distributed Denial of Service (DDoS):** Serangan siber dengan membanjiri server/jaringan dengan lalu lintas palsu hingga layanan terganggu.  
-21. **Single Sign-On (SSO):** Mekanisme autentikasi yang memungkinkan pengguna mengakses beberapa aplikasi dengan satu kali login.  
-22. **Role-Based Access Control (RBAC):** Kontrol akses berdasarkan peran dalam organisasi, sesuai tugas dan tanggung jawab.  
-23. **Access Control List (ACL):** Daftar aturan yang menentukan izin akses terhadap objek tertentu (file, folder, jaringan, dsb.).  
-24. **Privileged Access Management (PAM):** Mekanisme pengelolaan akun dengan hak akses tinggi (administrator/root) agar penggunaannya terkontrol dan diaudit.  
-25. **Clean Desk Policy:** Kebijakan agar area kerja bebas dari dokumen/ perangkat sensitif yang ditinggalkan tanpa pengamanan.  
-26. **Clear Screen Policy:** Kebijakan untuk selalu mengunci atau menutup layar perangkat saat tidak digunakan, guna mencegah akses tidak sah ke informasi yang sedang ditampilkan.  
-27. **Due Diligence:** Penilaian awal terhadap pihak ketiga (vendor/mitra) untuk memastikan kepatuhan keamanan sebelum kerja sama.  
-28. **Patch Management:** Proses pembaruan perangkat lunak/sistem operasi untuk menutup kerentanan keamanan.  
-29. **Change Management (Manajemen Perubahan):** Prosedur formal untuk merencanakan, menguji, menyetujui, dan menerapkan perubahan sistem/infrastruktur agar tidak menimbulkan kerentanan baru.
+2. **Sistem Manajemen Keamanan Informasi (SMKI):** Bagian dari sistem manajemen secara keseluruhan yang berdasarkan pada pendekatan risiko bisnis untuk membangun, menerapkan, mengoperasikan, memantau, mengkaji ulang, memelihara, dan meningkatkan keamanan informasi.  
+3. **Aset Informasi:** Segala bentuk data, perangkat keras, perangkat lunak, maupun sumber daya manusia yang memiliki nilai bagi penyelenggaraan SPBE.  
+4. **Ancaman (*Threat*):** Potensi penyebab insiden yang tidak diinginkan yang dapat mengakibatkan kerusakan pada sistem atau organisasi.  
+5. **Kerentanan (*Vulnerability*):** Kelemahan dari suatu aset atau pengendalian yang dapat dieksploitasi oleh satu atau lebih ancaman.  
+6. **Risiko (*Risk*):** Kemungkinan terjadinya insiden keamanan informasi akibat kombinasi ancaman yang mengeksploitasi kerentanan, beserta dampak yang ditimbulkan.  
+7. **Insiden Keamanan Informasi:** Kejadian tunggal atau serangkaian kejadian keamanan informasi yang tidak diinginkan atau tidak terduga yang memiliki kemungkinan signifikan untuk mengganggu operasi bisnis dan mengancam keamanan informasi.  
+8. **Data Pribadi:** Data tentang orang perseorangan yang teridentifikasi atau dapat diidentifikasi secara tersendiri atau dikombinasikan dengan informasi lainnya baik secara langsung maupun tidak langsung melalui sistem elektronik atau nonelektronik.  
+9. **Subjek Data Pribadi:** Orang perseorangan yang data pribadinya dikumpulkan, digunakan, disimpan, atau dikelola oleh pengendali data pribadi.  
+10. **Pengendali Data Pribadi (*Data Controller*):** Pihak yang menentukan tujuan dan melakukan kendali pemrosesan data pribadi (dalam konteks pedoman ini adalah Pemerintah Kota Mojokerto).  
+11. **Prosesor Data Pribadi (*Data Processor*):** Pihak yang melakukan pemrosesan data pribadi atas nama dan berdasarkan instruksi dari pengendali data pribadi, dapat berupa unit internal atau pihak ketiga (vendor).  
+12. **Business Continuity Plan (BCP):** Rencana terdokumentasi yang berisi prosedur dan informasi yang dikembangkan, dikompilasi, dan dipelihara agar siap digunakan dalam insiden yang dapat mengganggu kelangsungan operasi bisnis.  
+13. **Disaster Recovery Plan (DRP):** Rencana pemulihan sistem dan infrastruktur TIK setelah terjadi bencana atau insiden besar, agar layanan dapat kembali beroperasi normal dalam waktu yang telah ditentukan (Recovery Time Objective).  
+14. **Secure Software Development Life Cycle (SSDLC):** Metodologi pengembangan perangkat lunak yang mengintegrasikan praktik keamanan di setiap tahap siklus hidup pengembangan (perencanaan, desain, pengembangan, pengujian, deployment, dan pemeliharaan).  
+15. **Zero Trust Security / Zero Trust Network Access (ZTNA):** Model keamanan yang berprinsip "never trust, always verify" dimana tidak ada pengguna atau perangkat yang dipercaya secara default, sehingga setiap akses harus diverifikasi dan divalidasi.  
+16. **Penilaian Kerentanan (*Vulnerability Assessment*):** Proses sistematis untuk mengidentifikasi, mengkuantifikasi, dan memprioritaskan kerentanan dalam sistem informasi, aplikasi, dan infrastruktur TIK.  
+17. **Uji Penetrasi (*Penetration Testing / Pentest*):** Simulasi serangan siber yang dilakukan secara terkontrol dan terotorisasi untuk mengevaluasi keamanan sistem dengan mencoba mengeksploitasi kerentanan yang ada.  
+18. **Hardening Sistem:** Proses penguatan konfigurasi sistem dengan menghilangkan layanan yang tidak diperlukan, menutup port yang tidak digunakan, dan menerapkan pengaturan keamanan sesuai standar (seperti CIS Benchmark).  
+19. **Application Programming Interface (API):** Antarmuka pemrograman aplikasi yang memungkinkan komunikasi dan pertukaran data antar sistem atau aplikasi yang berbeda.  
+20. **Sistem Penghubung Layanan:** Sistem yang menghubungkan berbagai layanan SPBE untuk memfasilitasi integrasi dan interoperabilitas data antar sistem.  
+21. **Jaringan Intra Pemerintah:** Jaringan komunikasi data yang menghubungkan sistem elektronik di lingkungan instansi pemerintah untuk mendukung penyelenggaraan SPBE.  
+22. **Firewall:** Perangkat atau perangkat lunak keamanan jaringan yang memantau dan mengendalikan lalu lintas jaringan masuk dan keluar berdasarkan aturan keamanan yang telah ditentukan.  
+23. **Web Application Firewall (WAF):** Firewall khusus yang melindungi aplikasi web dengan memfilter dan memantau lalu lintas HTTP/HTTPS untuk mencegah serangan seperti SQL injection, XSS, dan serangan web lainnya.  
+24. **Intrusion Detection System (IDS):** Sistem yang memantau aktivitas jaringan atau sistem untuk mendeteksi aktivitas mencurigakan atau pelanggaran kebijakan keamanan.  
+25. **Intrusion Prevention System (IPS):** Sistem yang tidak hanya mendeteksi tetapi juga dapat mencegah atau memblokir aktivitas berbahaya secara otomatis.  
+26. **Virtual Private Network (VPN):** Teknologi yang menciptakan koneksi aman dan terenkripsi melalui jaringan publik (seperti internet) untuk mengakses jaringan privat.  
+27. **Network Access Control (NAC):** Pendekatan keamanan jaringan yang membatasi ketersediaan sumber daya jaringan hanya untuk perangkat endpoint yang mematuhi kebijakan keamanan yang ditetapkan.  
+28. **Security Information and Event Management (SIEM):** Solusi yang mengumpulkan, menganalisis, dan mengelola log serta event keamanan dari berbagai sumber untuk mendeteksi ancaman dan insiden keamanan secara real-time.  
+29. **Endpoint:** Perangkat komputasi yang terhubung ke jaringan dan dapat menjadi titik masuk atau keluar untuk komunikasi jaringan, seperti komputer, laptop, smartphone, tablet, atau server.  
+30. **Phishing:** Teknik rekayasa sosial yang menggunakan email, pesan, atau situs web palsu untuk menipu korban agar memberikan informasi sensitif seperti kredensial login atau data pribadi.  
+31. **Ransomware:** Jenis perangkat lunak berbahaya (malware) yang mengenkripsi data korban dan meminta pembayaran tebusan untuk mengembalikan akses ke data tersebut.  
+32. **Distributed Denial of Service (DDoS):** Serangan siber yang bertujuan membuat layanan tidak tersedia dengan membanjiri target dengan lalu lintas internet dari berbagai sumber secara bersamaan.  
+33. **Enkripsi:** Proses mengubah informasi menjadi kode rahasia untuk menyembunyikan makna sebenarnya, sehingga hanya pihak yang memiliki kunci dekripsi yang dapat membacanya.  
+34. **Hash Function:** Fungsi matematis yang mengubah data dengan ukuran berapa pun menjadi string dengan panjang tetap (hash value) yang unik, digunakan untuk memverifikasi integritas data.  
+35. **Tanda Tangan Elektronik:** Data elektronik yang dilekatkan, terasosiasi, atau terkait dengan data elektronik lainnya yang digunakan sebagai alat verifikasi dan autentikasi.  
+36. **Single Sign-On (SSO):** Mekanisme autentikasi yang memungkinkan pengguna mengakses beberapa aplikasi atau sistem dengan menggunakan satu set kredensial login.  
+37. **Multi-Factor Authentication (MFA):** Metode autentikasi yang memerlukan dua atau lebih faktor verifikasi independen untuk membuktikan identitas pengguna.  
+38. **Role-Based Access Control (RBAC):** Model kontrol akses yang memberikan hak akses kepada pengguna berdasarkan peran mereka dalam organisasi.  
+39. **Access Control List (ACL):** Daftar izin yang terkait dengan objek sistem yang menentukan pengguna atau proses mana yang dapat mengakses objek tersebut dan operasi apa yang diizinkan.  
+40. **Privileged Access Management (PAM):** Solusi keamanan yang membantu organisasi mengelola dan mengamankan akun dengan hak akses istimewa (privileged accounts) seperti administrator sistem.  
+41. **Clean Desk Policy:** Kebijakan yang mengharuskan karyawan untuk memastikan area kerja mereka bebas dari dokumen sensitif, media penyimpanan, atau perangkat yang tidak diamankan saat tidak digunakan.  
+42. **Clear Screen Policy:** Kebijakan yang mengharuskan pengguna untuk mengunci atau log out dari sistem saat meninggalkan workstation untuk mencegah akses tidak sah.  
+43. **Due Diligence:** Proses investigasi dan evaluasi menyeluruh terhadap pihak ketiga (vendor, mitra, atau kontraktor) sebelum menjalin kerja sama untuk memastikan mereka memenuhi standar keamanan yang dipersyaratkan.  
+44. **Patch Management:** Proses sistematis untuk mengidentifikasi, mengunduh, menguji, dan menerapkan pembaruan perangkat lunak (patches) untuk memperbaiki kerentanan keamanan atau bug.  
+45. **Change Management (Manajemen Perubahan):** Proses formal dan terstruktur untuk merencanakan, mengevaluasi, menyetujui, mengimplementasikan, dan mendokumentasikan perubahan pada sistem TI agar tidak menimbulkan risiko keamanan baru.  
+46. **Vulnerability Management:** Proses berkelanjutan untuk mengidentifikasi, mengevaluasi, memperlakukan, dan melaporkan kerentanan keamanan dalam sistem dan perangkat lunak.  
+47. **Security Baseline:** Konfigurasi minimum standar keamanan yang harus diterapkan pada sistem, aplikasi, atau perangkat jaringan.  
+48. **Data Masking:** Teknik untuk menyembunyikan data asli dengan memodifikasi kontennya (misalnya dengan karakter substitusi) untuk melindungi informasi sensitif dari paparan yang tidak sah.  
+49. **Recovery Time Objective (RTO):** Durasi waktu maksimum yang dapat ditoleransi untuk pemulihan sistem atau layanan setelah terjadi gangguan.  
+50. **Recovery Point Objective (RPO):** Jumlah maksimum data yang dapat hilang (diukur dalam waktu) yang dapat ditoleransi organisasi dalam kejadian bencana.
 
 ## 
 
@@ -505,7 +526,7 @@ Untuk menyelenggarakan SMKI SPBE, dibentuk **Tim Pelaksana SMKI SPBE** di lingku
 
 #### **3.3.3 Administrator Akses**  {#3.3.3-administrator-akses}
 
-**Jabatan:** Pengelola TI dan Keamanan Informasi Dinas Komunikasi dan Informatika Kota Mojokerto  
+**Jabatan:** Pengelola TI pada perangkat daerah 
 **Tugas dan tanggung jawab:**
 
 * Mengelola hak akses pengguna sesuai prinsip RBAC.  
@@ -647,7 +668,7 @@ Untuk memastikan program kerja keamanan SPBE dapat berjalan efektif, Pemerintah 
 #### **4.4.1 Sumber Daya** {#4.4.1-sumber-daya}
 
 * Alokasi SDM untuk Tim SMKI pada setiap perangkat daerah.  
-* Penganggaran operasional keamanan (tools, audit, pengujian, pemantauan).  
+* Penganggaran operasional keamanan. 
 * Infrastruktur pendukung seperti sistem monitoring, firewall, WAF, SIEM, storage log, dan server backup.
 
 #### **4.4.2 Kompetensi**  {#4.4.2-kompetensi}
@@ -659,7 +680,7 @@ Untuk memastikan program kerja keamanan SPBE dapat berjalan efektif, Pemerintah 
 | **Koordinator SMKI**                   | Memahami kebijakan SMKI & SPBE Pemkot Mengetahui konsep dasar keamanan informasi Mampu melakukan koordinasi lintas-OPD Mampu menyusun laporan dasar SMKI                                                | Sosialisasi SMKI & kebijakan keamanan Pelatihan koordinasi & pelaporan SMKI                        |
 | **Pengelola Keamanan Informasi (OPD)** | Mengetahui aset informasi di OPD Mampu menerapkan aturan dasar keamanan (password, akses, backup) Mengetahui prosedur insiden & eskalasi Mampu melakukan pengecekan rutin keamanan aplikasi/layanan OPD | Pelatihan dasar keamanan informasi Edukasi penggunaan aman perangkat & aplikasi                    |
 | **Admin Sistem** (Server/Infra)        | Mengetahui dasar sistem operasi server Memahami aturan update & patch Memahami pengelolaan user & permission dasar Mampu mengikuti panduan konfigurasi aman                                             | Pelatihan internal administrasi server dasar Pelatihan penerapan kebijakan akses & password        |
-| **Admin Aplikasi**                     | Memahami fungsi aplikasi yang dikelola OPD Mengetahui cara pengelolaan akun aplikasi Memahami prosedur backup & restore data aplikasi Mampu melaporkan bug & insiden aplikasi                           | Pelatihan penggunaan aplikasi OPD Penjelasan prosedur backup, logging, dan update                  |
+| **Admin Aplikasi**                     | Memahami fungsi aplikasi yang dikelola OPD Mengetahui cara pengelolaan akun aplikasi Memahami prosedur backup & restore data aplikasi Mampu melaporkan bug & insiden aplikasi                           | Pelatihan penggunaan aplikasi                                                                      |
 | **TTIS (Tim Tanggap Insiden Siber)**   | Mengetahui jenis insiden (phishing, malware, deface) Mengetahui prosedur pelaporan & respons awal Mampu melakukan dokumentasi sederhana insiden Memahami komunikasi eskalasi ke Diskominfo/BSSN         | Pelatihan internal penanganan insiden dasar Simulasi kecil insiden (phishing, anomali login, dll.) |
 | **Auditor Internal SMKI**              | Mengetahui prinsip dasar audit keamanan Memahami dokumen kebijakan & prosedur SMKI Mampu menggunakan checklist audit Mampu membuat laporan temuan sederhana                                             | Pelatihan internal dasar audit SMKI Workshop membaca checklist audit                               |
 | **DPO / Pengelola Data (PPID/OPD)**    | Mengetahui konsep dasar perlindungan data pribadi Memahami klasifikasi data (umum, terbatas, sensitif) Mengetahui prosedur pengelolaan data yang aman Mampu melaporkan insiden kebocoran data           | Sosialisasi perlindungan data pribadi Pelatihan dasar tata kelola data OPD                         |
@@ -668,7 +689,7 @@ Untuk memastikan program kerja keamanan SPBE dapat berjalan efektif, Pemerintah 
 * Evaluasi kompetensi dilakukan melalui penilaian kinerja, pengalaman, dan sertifikasi (jika relevan).
 
 
-#### **4.4.3 Komunikasi Internal & Eksternal *(Klausul 7.4)*** {#4.4.3-komunikasi-internal-&-eksternal-(klausul-7.4)}
+#### **4.4.3 Komunikasi Internal & Eksternal** {#4.4.3-komunikasi-internal-&-eksternal}
 
 * Mekanisme komunikasi formal terkait keamanan informasi (rapat SMKI, surat edaran, email resmi).  
 * Jalur komunikasi dan eskalasi insiden keamanan informasi.  
@@ -720,6 +741,7 @@ Identifikasi aset dilakukan sebagai langkah awal pengamanan untuk memastikan set
    * Sistem Penghubung Layanan  
    * Peralatan TIK (PC, laptop, printer, mobile device)  
    * Virtual Machine, container, storage  
+   * Lisensi / aset tidak berwujud lainnya
 4. **Aset Sumber Daya Manusia**  
    * ASN pengguna aplikasi  
    * Admin sistem, admin aplikasi, pengelola data  
@@ -773,7 +795,7 @@ Klasifikasi ditetapkan berdasarkan ketentuan hukum, fungsi, jabatan, dan hasil a
 4. **Biasa / Publik**  
    Informasi yang aman untuk dipublikasikan masyarakat umum. Contoh: profil daerah, informasi layanan publik, berita resmi pemerintah, data statistik publik.
 
-#### **5.1.4 Pelabelan Aset** {#5.1.4-pelabelan-aset}
+#### **5.1.4 Pelabelan Aset Berdasarkan Tingkat Klasifikasi** {#5.1.4-pelabelan-aset}
 
 Setiap aset harus dilabeli sesuai tingkat klasifikasinya baik dalam bentuk fisik maupun elektronik.
 
@@ -785,7 +807,7 @@ Setiap aset harus dilabeli sesuai tingkat klasifikasinya baik dalam bentuk fisik
    * ditandai sebagai INTERNAL / TERBATAS  
    * pembatasan akses per-unit kerja  
 3. **Label untuk Aset Publik**  
-   * ditandai sebagai PUBLIK atau OPEN DATA
+   * tidak perlu dilakukan pelabelan secara khusus
 
 Pelabelan wajib dilakukan oleh **Pemilik Aset.**
 
@@ -925,7 +947,7 @@ Kegiatan pelatihan dan awareness mengacu pada program kerja yang ditetapkan dala
   * penguncian pintu  
   * akses kartu/kunci khusus  
   * pencatatan tamu  
-  * CCTV pada area kritis (jika tersedia)  
+  * CCTV pada area kritis 
 * Dokumen fisik sensitif wajib disimpan pada lemari arsip yang terkunci.  
 * Perangkat penting (server mini, switch, router, NAS, media backup) harus ditempatkan di ruang dengan akses terbatas, bukan area publik/meja terbuka.
 
@@ -958,8 +980,7 @@ Kegiatan pelatihan dan awareness mengacu pada program kerja yang ditetapkan dala
 * Pemeliharaan berkala terhadap fasilitas pendukung:  
   * listrik, UPS, grounding  
   * pendingin ruangan (AC)  
-  * pemadam kebakaran (APAR), smoke detector  
-  * stabilitas jaringan  
+  * pemadam kebakaran (APAR)
 * Pemantauan suhu, kelembaban, dan kebersihan ruang server.  
 * Tersedia SOP penanganan darurat (kebakaran, banjir, pemadaman listrik).
 
@@ -971,16 +992,17 @@ Pengendalian keamanan pada lapisan infrastruktur bertujuan untuk melindungi aset
 
 Pemerintah Kota Mojokerto mengamankan server dan platform layanan SPBE untuk menjamin ketersediaan dan integritas data.
 1. **Pemisahan Peran Server**: Server dikelompokkan berdasarkan fungsinya (Web, App, DB) dan dipisahkan dalam zona jaringan yang berbeda sesuai tingkat sensitivitas data.
-2. **Keamanan Sistem Operasi**: Penggunaan sistem operasi yang didukung (LTS), penghapusan layanan/aplikasi yang tidak diperlukan, dan pembaruan keamanan berkala.
+2. **Keamanan Sistem Operasi**: Penggunaan sistem operasi yang didukung (LTS) - (https://endoflife.date), penghapusan layanan/aplikasi yang tidak diperlukan, dan pembaruan keamanan berkala.
 3. **Pusat Data Aman**: Penempatan perangkat keras pada pusat data yang memiliki kontrol akses fisik, sistem pendingin, dan catu daya cadangan (UPS/Generator).
 
-#### **5.5.2 Pengamanan Perangkat Endpoint (PC/Laptop/Workstation)** {#5.5.2-pengamanan-perangkat-endpoint}
+#### **5.5.2 Pengamanan Perangkat Endpoint** {#5.5.2-pengamanan-perangkat-endpoint}
 
 Setiap perangkat kerja yang digunakan pegawai wajib dilindungi untuk mencegah akses tidak sah ke jaringan internal.
-1. **Manajemen Inventaris**: Pencatatan seluruh perangkat endpoint yang diizinkan terhubung ke jaringan dinas melalui mekanisme integrasi aset.
-2. **Kontol Akses Perangkat**: Penggunaan password/biometrik untuk login ke perangkat dan penguncian layar otomatis (screen lockout) saat tidak digunakan.
-3. **Proteksi Malware**: Instalasi antivirus atau Endpoint Detection and Response (EDR) yang terkelola secara terpusat dan diperbarui secara otomatis.
-4. **Penyimpanan Aman**: Enkripsi media penyimpanan (Full Disk Encryption) terutama untuk perangkat laptop guna mencegah kebocoran data jika perangkat hilang.
+1. **Pembaruan sistem secara teratur**
+2. **Menggunakan aplikasi resmi dan terpercaya**
+3. **Pengendalian Akses**: Penggunaan password/biometrik untuk login ke perangkat dan penguncian layar otomatis (screen lockout) saat tidak digunakan.
+4. **Proteksi Malware**: Instalasi antivirus atau Endpoint Detection and Response (EDR) yang terkelola secara terpusat dan diperbarui secara otomatis.
+5. **Penyimpanan Aman**: Enkripsi media penyimpanan (Full Disk Encryption) terutama untuk perangkat laptop guna mencegah kebocoran data jika perangkat hilang.
 
 #### **5.5.3 Hardening Server dan Endpoint** {#5.5.3-hardening-server-dan-endpoint}
 
@@ -996,10 +1018,9 @@ Setiap perangkat sebelum dihubungkan ke jaringan produksi wajib melalui proses h
 ##### **5.5.4 Arsitektur dan Segmentasi Jaringan** {#5.5.4-arsitektur-and-segmentasi-jaringan}
 
 Jaringan Intra Pemerintah Daerah dirancang berbasis pemisahan zona keamanan (*security zoning*) untuk mengisolasi potensi ancaman:
-1. **Zona Publik/DMZ**: Segmen untuk layanan publik yang berinteraksi langsung dengan jaringan eksternal.
+1. **Zona Publik**: Segmen untuk layanan publik yang berinteraksi langsung dengan jaringan eksternal.
 2. **Zona Internal**: Segmen untuk aplikasi administrasi pemerintahan dan kolaborasi internal.
-3. **Zona Data Strategis**: Segmen khusus untuk basis data keuangan, kepegawaian, dan data sensitif dengan kontrol akses paling ketat.
-4. **Segmentasi Logis (VLAN)**: Pemisahan lalu lintas antar unit kerja menggunakan VLAN dan Access Control List (ACL) pada level distribusi jaringan.
+
 
 ##### **5.5.5 Pengamanan Lalu Lintas Jaringan** {#5.5.5-pengamanan-lalu-lintas-jaringan}
 
@@ -1012,7 +1033,7 @@ Perlindungan terhadap ancaman pada jalur komunikasi data dilakukan melalui mekan
 ##### **5.5.6 Konten Filtering** {#5.5.6-konten-filtering}
 
 Pengendalian akses konten internet bertujuan untuk menjaga produktivitas dan keamanan aset informasi:
-1. **Web & DNS Filtering**: Pemblokiran otomatis terhadap akses ke situs judi, pornografi, penyebaran berita bohong (hoaks), dan malware.
+1. **Web & DNS Filtering**: Pemblokiran otomatis terhadap akses ke situs judi, pornografi, penyebaran berita bohong (hoaks), mining, proxy, malware dan sebagainya.
 2. **Pembatasan Layanan Risiko Tinggi**: Pemblokiran terhadap penggunaan layanan P2P, VPN anonymizer, dan aplikasi *shadow IT* yang tidak disetujui secara resmi.
 
 ### **5.6 Keamanan Aplikasi Web dan Mobile** {#5.6-keamanan-aplikasi-web-dan-mobile}
@@ -1213,7 +1234,7 @@ Standar operasional logging dan pemantauan aplikasi mobile wajib merujuk pada ke
    - Bug bounty program untuk encourage responsible disclosure.  
    - Mechanism untuk user melaporkan security concerns.
 
-#### **5.6.3 Keamanan Integrasi dan API** {#5.6.3-keamanan-integrasi-dan-api}
+#### **5.6.3 Keamanan Integrasi dan API (Sistem Penghubung Layanan)** {#5.6.3-keamanan-integrasi-dan-api}
 
 Sistem integrasi (Sistem Penghubung Layanan) mengelola aliran data antar aplikasi SPBE dengan standar keamanan sebagai berikut:
 
@@ -1236,7 +1257,7 @@ Sistem integrasi (Sistem Penghubung Layanan) mengelola aliran data antar aplikas
 6.  **Kontinuitas API**
     -   Mekanisme *high availability* dan pemulihan bencana mengikuti standar pada **Bab 5.11**.
 
-### **5.7 Pengelolaan Akses (Annex A 5.14, 8.11–8.14)** {#5.7-pengelolaan-akses-(annex-a-5.14,-8.11–8.14)}
+### **5.7 Pengelolaan Akses** {#5.7-pengelolaan-akses}
 
 Pengelolaan akses bertujuan memastikan bahwa hanya pengguna yang berwenang yang dapat mengakses informasi, sistem, dan layanan sesuai kebutuhan tugasnya (need-to-know dan least privilege). Pengendalian akses meliputi pemberian, perubahan, dan pencabutan hak akses, penggunaan kata sandi yang aman, serta penerapan mekanisme autentikasi berlapis.
 
@@ -1256,24 +1277,24 @@ Pengelolaan akses bertujuan memastikan bahwa hanya pengguna yang berwenang yang 
 Pengamanan autentikasi diterapkan untuk memastikan setiap akun pengguna terlindungi dengan mekanisme keamanan yang memadai. Manajemen kata sandi mengikuti ketentuan rendah, tinggi dan strategis / administrator seperti berikut:  
 Tabel Ketentuan Autentikasi dan Kebijakan Password
 
-| Ketentuan                                        | Rendah                            | Tinggi                    | Strategis / Administrator                    |
-| :----------------------------------------------- | :-------------------------------- | :------------------------ | :------------------------------------------- |
-| Panjang minimum kata sandi                       | 8                                 | 10–12                     | 12–15                                        |
-| Usia maksimal kata sandi (hari)                  | 180                               | 120                       | 90                                           |
-| Percobaan gagal sebelum lockout                  | 5                                 | 4                         | 3                                            |
-| Durasi lockout (menit)                           | 10                                | 15                        | 30                                           |
-| Peringatan sebelum kadaluarsa (hari)             | 14                                | 14                        | 14                                           |
-| Autentikasi multifaktor (MFA)                    | Opsional                          | Disarankan                | Wajib                                        |
-| Usia minimum password untuk reset (hari)         | 0                                 | 0                         | 0                                            |
-| Riwayat kata sandi (password history)            | 3                                 | 4                         | 5                                            |
-| Kompleksitas (huruf besar, kecil, angka, simbol) | Ya                                | Ya (lebih ketat)          | Ya (wajib)                                   |
-| Larangan password umum/lemah                     | Ya                                | Ya                        | Ya                                           |
-| Timeout sesi tidak aktif (menit)                 | 15                                | 10                        | 5–10                                         |
-| Pemulihan dan reset kata sandi                   | Disarankan                        | Email / Telepon           | Email / Telepon \+ OTP                       |
-| Waktu berlaku link reset                         | 1 hari                            | 60 menit                  | 30 menit                                     |
-| Proteksi brute-force & monitoring                | Dasar                             | Lengkap                   | Lengkap \+ Alerting                          |
-| Akses remote                                     | Tidak disarankan                  | Perlu VPN                 | Wajib VPN \+ MFA                             |
-| Penggunaan SSO (Single Sign-On)                  | Opsional (jika layanan mendukung) | Diusulkan menggunakan SSO | Wajib untuk semua admin & aplikasi strategis |
+| Ketentuan                                        | Rendah                            | Tinggi                           | Strategis / Administrator                               |
+| :----------------------------------------------- | :-------------------------------- | :------------------------------- | :------------------------------------------------------ |
+| Panjang minimum kata sandi                       | 8                                 | 10–12                            | 12–15                                                   |
+| Usia maksimal kata sandi (hari)                  | 180                               | 120                              | 90                                                      |
+| Percobaan gagal sebelum lockout                  | 20                                | 10                               | 5                                                       |
+| Durasi lockout (menit)                           | 480                               | 120                              | 60                                                      |
+| Peringatan sebelum kadaluarsa (hari)             | 14                                | 14                               | 14                                                      |
+| Autentikasi multifaktor (MFA)                    | Opsional                          | Disarankan                       | Wajib atau bisa diterapkan                              |
+| Usia minimum password untuk reset (hari)         | 0                                 | 0                                | 0                                                       |
+| Riwayat kata sandi sama (password history)       | 3                                 | 4                                | 5                                                       |
+| Kompleksitas (huruf besar, kecil, angka, simbol) | Ya                                | Ya (lebih ketat)                 | Ya (wajib)                                              |
+| Larangan password umum/lemah                     | Ya                                | Ya                               | Ya                                                      |
+| Timeout sesi tidak aktif (menit)                 | 15                                | 10                               | 5–10                                                    |
+| Pemulihan dan reset kata sandi                   | Disarankan                        | Email / Telepon                  | Email / Telepon \+ OTP                                  |
+| Waktu berlaku link reset                         | 1 hari                            | 60 menit                         | 30 menit                                                |
+| Proteksi brute-force & monitoring                | Dasar                             | Lengkap                          | Lengkap \+ Alerting                                     |
+| Akses remote                                     | Wajib VPN                         | Wajib VPN                        | Wajib VPN                                               |
+| Penggunaan SSO (Single Sign-On)                  | Opsional (jika layanan mendukung) | Direkomendasikan menggunakan SSO | Direkomendasikan untuk semua admin & aplikasi strategis |
 
 **Catatan :**
 
@@ -1281,26 +1302,13 @@ Tabel Ketentuan Autentikasi dan Kebijakan Password
 * *Tinggi* digunakan untuk layanan SPBE bersifat operasional namun tidak strategis.  
 * *Strategis/Admin* wajib diterapkan untuk sistem induk, dashboard pusat data, aplikasi publik kritikal, sistem keuangan, dan seluruh akun administrator.
 
-#### **5.7.3 Pengelolaan Perangkat Mobile & Remote Access** {#5.7.3-pengelolaan-perangkat-mobile-&-remote-access}
 
-Pengelolaan perangkat mobile dan akses jarak jauh dilakukan untuk mengamankan akses terhadap layanan SPBE dari luar lingkungan instansi.
-
-1. **Pengamanan Perangkat Mobile**  
-   * Penggunaan Mobile Device Management (MDM) untuk mengendalikan perangkat.  
-   * Enkripsi penuh (full-disk encryption) dan sandi wajib pada seluruh perangkat.  
-2. **Kebijakan BYOD**   
-   * Pembatasan aplikasi, segmentasi akses, dan pemisahan data pribadi/dinas.  
-3. **Akses Remote**  
-   * Akses jarak jauh hanya dapat dilakukan melalui VPN dan autentikasi multifaktor (MFA).  
-   * Monitoring sesi remote dan pembatasan administratif sesuai kebutuhan tugas.
-
-#### **5.7.4 Review & Pencabutan Hak Akses** {#5.7.4-review-&-pencabutan-hak-akses}
+#### **5.7.3 Review & Pencabutan Hak Akses** {#5.7.4-review-&-pencabutan-hak-akses}
 
 1. Review akses dilakukan secara berkala minimal setiap **6 bulan** oleh pemilik sistem.  
 2. Daftar pengguna, peran, serta hak akses disesuaikan terhadap struktur organisasi dan kebutuhan kerja terbaru.  
 3. Hak akses dicabut segera saat pengguna:  
    * resign,  
-   * cuti panjang,  
    * perubahan jabatan, atau  
    * melanggar aturan penggunaan sistem.  
 4. Proses pencabutan akses harus tercatat sebagai bagian dari audit trail.
@@ -1364,8 +1372,7 @@ Teknik masking dan anonimisasi diterapkan untuk melindungi data sensitif dalam l
 3. **Penggunaan Spesifik**  
 - Full masking untuk semua data sensitif dilingkungan *development* dan pengujian.  
 - Anonimisasi atau aggregated data untuk analitik.  
-- Berbagi data dengan pihak ketiga dilakukan dengan anonimisasi minimal.  
-4. **Kontrol Implementasi**  
+- Berbagi data dengan pihak ketiga dilakukan dengan anonimisasi minimal.   
 - Penggunaan data masking tools terintegrasi dengan pipeline  
 - Dilakukan testing untuk memastikan data tetap dapat digunakan setelah masking.
 
@@ -1390,19 +1397,18 @@ Kebijakan retensi dan pemusnahan data memastikan data disimpan sesuai kebutuhan 
 | Log Sistem                | 2 bulan         | Kebijakan Internal |
 
 2. **Pemusnahan Data Aman *(Secure Data Disposal)***  
-- Media Digital:  
-  - Hard Drive: 3-pass secure erase atau physical destruction  
-  - SSD: Cryptographic erase atau physical destruction  
-  - Cloud Storage: Cryptographic erasure dengan verifikasi  
-  - Backup Media: Degaussing (magnetic) atau shredding (optical)  
-- Media Fisik:  
-  - Dokumen: Cross-cut shredding (minimal 2x2mm)  
-  - Optical Media: Shredding atau dibakar  
+   - Media Digital:  
+     - Hard Drive: 3-pass secure erase atau physical destruction  
+     - SSD: Cryptographic erase atau physical destruction  
+     - Cloud Storage: Cryptographic erasure dengan verifikasi  
+     - Backup Media: Degaussing (magnetic) atau shredding (optical)  
+   - Media Fisik:  
+     - Shredding atau dibakar  
 3. **Prosedur Pemusnahan**  
-- Persetujuan pemilik data dan atasan.  
-- Berita acara pemusnahan dengan saksi.  
-- Audit trail dan bukti pemusnahan.  
-- Pemeriksaan langsung untuk pemusnahan data vendor.
+   - Persetujuan pemilik data dan atasan.  
+   - Berita acara pemusnahan dengan saksi.  
+   - Audit trail dan bukti pemusnahan.  
+   - Pemeriksaan langsung untuk pemusnahan data vendor.
 
 #### **5.8.5 Privacy by Design** {#5.8.5-privacy-by-design}
 
@@ -1483,11 +1489,11 @@ Tanda tangan elektronik merupakan komponen penting dalam menjamin **otentikasi, 
 Pengelolaan konfigurasi dan patch dilakukan untuk mencegah kerentanan akibat sistem yang tidak diperbarui atau konfigurasi yang tidak aman.
 
 1. **Standarisasi Konfigurasi Sistem**  
-   * Penerapan baseline konfigurasi aman (*secure baseline*) untuk server, workstation, aplikasi, dan perangkat jaringan.  
+   * Penerapan baseline konfigurasi aman (*secure baseline*) untuk server, aplikasi, dan perangkat jaringan.  
    * Penggunaan prinsip hardening mengacu pada CIS Benchmark atau standar nasional pemerintah.  
 2. **Pengelolaan Patch dan Pembaruan Keamanan**  
    * Patch keamanan wajib diterapkan sesuai tingkat kritikalitas:  
-     * **Kritis**: maksimal 24–48 jam  
+     * **Kritis**: maksimal 3 hari 
      * **Tinggi**: maksimal 7 hari  
      * **Sedang/Rendah**: sesuai jadwal 3 bulanan  
    * Monitoring kerentanan dilakukan melalui *vulnerability scanning* berkala.  
@@ -1529,7 +1535,7 @@ Sistem wajib menggunakan metode penanganan kesalahan *(error)* untuk mencegah ke
 Layanan SPBE wajib menerapkan mekanisme logging yang sistematis sebagai sumber data utama audit dan deteksi insiden.
 
 1. **Standar Pencatatan Log**  
-   * **Sinkronisasi Waktu**: Seluruh sistem wajib menggunakan NTP terpusat untuk menjamin urutan kronologis log.  
+   * **Sinkronisasi Waktu**: Seluruh sistem wajib menggunakan server NTP (Network Time Protocol)  untuk menjamin urutan kronologis log.  
    * **Atribut Minimal**: Setiap entri log harus memuat *timestamp*, identitas subjek (user/sistem), jenis aktivitas, objek yang diakses, status hasil, dan alamat asal (IP/MAC).
    * **Event yang Wajib Dicatat**:
      - Aktivitas login (sukses/gagal) dan logout.
@@ -1538,7 +1544,7 @@ Layanan SPBE wajib menerapkan mekanisme logging yang sistematis sebagai sumber d
      - Kegagalan sistem, pengecualian aplikasi (errors), dan deteksi serangan.
 2. **Penyimpanan dan Retensi**  
    * **Penyimpanan Terpusat**: Log harus dikirim ke server SIEM atau log management terpusat secara real-time.
-   * **Retensi**: Log operasional disimpan minimal **1 tahun** untuk memenuhi kebutuhan audit kepatuhan dan forensik digital.
+   * **Retensi**: Log operasional disimpan minimal **2 bulan** untuk memenuhi kebutuhan audit kepatuhan dan forensik digital.
 3. **Keamanan dan Integritas Log**  
    * **Proteksi Akses**: Akses terhadap log dibatasi secara ketat hanya untuk personel yang berwenang (administrator log/auditor).
    * **Integritas**: Menggunakan mekanisme *write-once* atau proteksi file log dengan hashing untuk mencegah modifikasi atau penghapusan jejak audit.
@@ -1551,15 +1557,14 @@ Layanan SPBE wajib menerapkan mekanisme logging yang sistematis sebagai sumber d
    * Sistem pemantauan meliputi:  
      * Server dan aplikasi SPBE  
      * Firewall, IDS/IPS, WAF  
-     * Endpoint dan perangkat mobile  
    * Notifikasi otomatis dikirim jika ditemukan aktivitas berisiko tinggi.  
-3. Akses terhadap Log  
-   * Akses log dibatasi hanya untuk petugas berwenang (administrator, auditor internal, dan tim insiden).  
+2. Akses terhadap Log  
+   * Akses log dibatasi hanya untuk petugas berwenang (administrator dan tim insiden sesuai kebutuhan).  
    * Semua akses terhadap log juga harus dicatat dalam audit trail.  
-4. Audit & Review Log  
+3. Audit & Review Log  
    * Log direview secara berkala:  
-     * Mingguan untuk sistem kritis  
-     * bulanan untuk sistem non-kritis  
+     * Bulanan untuk sistem kritis  
+     * Triwulanan untuk sistem non-kritis  
    * Hasil review didokumentasikan sebagai bukti pengendalian.
 
 #### **5.9.3 Change Management** {#5.9.3-change-management}
@@ -1593,11 +1598,10 @@ Manajemen perubahan memastikan semua modifikasi pada sistem TI dilakukan secara 
 Manajemen kerentanan dilakukan untuk mengidentifikasi, menilai, dan memperbaiki kerentanan keamanan dalam sistem secara proaktif.
 
 1. **Vulnerability Assessment**  
-   - **Scanning Frequency**:  
-     - Sistem kritis: Bulanan  
+   - **Frekuensi**:  
      - Sistem production: Tahunan  
      - Sistem development: Sebelum deployment  
-   - **Scanning Scope**:  
+   - **Ruang Lingkup**:  
      - Network vulnerability scanning  
      - Web application scanning  
      - Database security scanning  
@@ -1609,16 +1613,16 @@ Manajemen kerentanan dilakukan untuk mengidentifikasi, menilai, dan memperbaiki 
 
 Klasifikasi risiko berdasarkan skala CVSS:
 
-- **Kritis**: 9.0-10.0 (Patch dalam 24-48 jam)  
+   - **Kritis**: 9.0-10.0 (Patch dalam 3 hari)  
   - **Tinggi**: 7.0-8.9 (Patch dalam 7 hari)  
   - **Sedang**: 4.0-6.9 (Patch dalam 30 hari)  
   - **Rendah**: 0.1-3.9 (Patch dalam 90 hari)  
-3. **Remediation Process**  
+1. **Remediation Process**  
    - **Prioritization**: Berdasarkan risk rating dan business impact  
    - **Patch Testing**: Testing di environment staging sebelum production  
    - **Remediation Tracking**: Ticket management untuk tracking progress  
    - **Verification**: Rescan untuk verifikasi remediation  
-4. **Threat Intelligence**  
+2. **Threat Intelligence**  
    - **Monitoring**: CVE databases, security advisories  
    - **Zero-day Response**: Prosedur respons untuk zero-day vulnerabilities  
    - **Vendor Notifications**: Subscribe to vendor security bulletins
@@ -1630,21 +1634,21 @@ Manajemen kapasitas memastikan ketersediaan resources yang memadai untuk menduku
 1. **Batasan Kapasitas**  
    - Resource Monitoring:  
      - CPU utilization (threshold: 80%)  
-     - Memory usage (threshold: 85%)  
-     - Storage capacity (threshold: 90%)  
-     - Network bandwidth (threshold: 75%)  
+     - Memory usage (threshold: 80%)  
+     - Storage capacity (threshold: 70%)  
+     - Network bandwidth (threshold: 80%)  
    - Analisa prediktif berdasarkan data historis  
 2. **Manajemen Performa**  
    - Standar performa ditetapkan untuk setiap sistem  
    - Terdapat notifikasi ketika threshold terlampaui  
    - Pelaksanaan *Load testing* untuk aplikasi baru/perubahan besar  
    - Analisis dan pengecekan *performance bottlenecks*  
-3. **Optimasi sumber daya *(Resource Optimization)***  
+3. **Optimasi sumber daya**  
    - Optimalisasi penggunaan resource sistem  
    - Distribusi beban kerja yang merata  
    - Review arsitektur sistem untuk meningkatkan efisiensi  
 4. **Capacity Reporting**  
-   - Laporan kapasitas bulanan/kuartalan  
+   - Laporan kapasitas tiap 6 bulan
    - Proyeksi kebutuhan kapasitas 6-12 bulan ke depan  
    - Rekomendasi untuk peningkatan kapasitas/optimasi  
      
@@ -1748,9 +1752,9 @@ Pengendalian kontinuitas keamanan informasi ditetapkan untuk memastikan terselen
 
 | Kategori            | RTO Maksimum | RPO Maksimum |
 | :------------------ | :----------- | :----------- |
-| **Strategis/Admin** | ≤ 4 jam      | ≤ 4 jam      |
-| **Tinggi**          | ≤ 8 jam      | ≤ 10 jam     |
-| **Rendah**          | ≤ 24 jam     | ≤ 48 jam     |
+| **Strategis/Admin** | ≤ 24 jam     | ≤ 24 jam     |
+| **Tinggi**          | ≤ 72 jam     | ≤ 72 jam     |
+| **Rendah**          | ≤ 7 hari     | ≤ 7 hari     |
 
    
 
@@ -1775,7 +1779,7 @@ Backup dan pemulihan data dilakukan untuk menjamin ketersediaan informasi dalam 
    * Semua backup wajib dienkripsi.  
    * Penyimpanan media backup memiliki kontrol fisik dan akses terbatas.  
 3. **Pengujian Pemulihan**  
-   * Uji restore dilakukan minimal **tri­wulanan**.  
+   * Uji restore dilakukan minimal 1 (satu) kali dalam **12 (dua belas) bulan** .  
    * Hasil uji dicatat sebagai bukti efektivitas kontrol.
 
 #### **5.11.3 Pemulihan Bencana & Latihan Simulasi** {#5.11.3-pemulihan-bencana-&-latihan-simulasi}
@@ -1793,32 +1797,9 @@ Backup dan pemulihan data dilakukan untuk menjamin ketersediaan informasi dalam 
    5. Uji fungsi sistem,  
    6. Pemulihan layanan secara bertahap.  
 2. **Pengujian & Simulasi Berkala**  
-   * Layanan **Strategis/Admin**: minimal **2 kali per tahun**.  
-   * Layanan **Tinggi**: minimal **1 kali per tahun**.  
+   * Layanan **Strategis/Admin/Tinggi**: minimal **1 kali tiap 12 bulan**.  
    * Evaluasi dilakukan terhadap kesesuaian dengan RTO dan RPO.  
    * Hasil pengujian wajib didokumentasikan dan dijadikan dasar peningkatan.
-
-#### **5.11.4 Pemeliharaan & Perbaikan Rencana** {#5.11.4-pemeliharaan-&-perbaikan-rencana}
-
-1. Pembaruan Berkala Dokumen BCP dan DRP wajib ditinjau dan diperbarui minimal 1 kali dalam 12 bulan, atau apabila terjadi perubahan signifikan pada:  
-   * Infrastruktur,  
-   * Arsitektur jaringan,  
-   * Layanan baru, atau  
-   * Hasil audit dan simulasi.  
-2. Tinjauan Pasca Insiden Setiap pelaksanaan DRP harus diikuti dengan:  
-   * Dokumentasi insiden,  
-   * Analisis akar penyebab,  
-   * Evaluasi efektivitas pemulihan,  
-   * Perbandingan RTO/RPO aktual,  
-   * Rekomendasi perbaikan kontrol.  
-3. Pengendalian Perubahan Setiap perubahan signifikan pada layanan kategori Tinggi atau Strategis/Admin wajib melalui:  
-   * Prosedur *Change Management*,  
-   * Penilaian risiko ulang,  
-   * Penyesuaian BCP/DRP.  
-4. Penyimpanan dan Distribusi Dokumen  
-   * Dokumen BCP dan DRP disimpan pada lokasi utama dan DR Site.  
-   * Diterbitkan dalam versi fisik dan digital.  
-   * Akses dibatasi hanya kepada personel berwenang.
 
 ### **5.12 Pengelolaan Pihak Ketiga** {#5.12-pengelolaan-pihak-ketiga}
 
@@ -1900,14 +1881,14 @@ Pemantauan dan pengukuran kinerja SMKI dilakukan untuk mengevaluasi efektivitas 
 1. **Metrik dan Indikator Kinerja**  
    * **Data dan Informasi**
 
-| Indikator Kinerja                                                | Target | Frekuensi      | Cara Pengukuran                                                        |
-| :--------------------------------------------------------------- | :----- | :------------- | :--------------------------------------------------------------------- |
-| Persentase data penting yang sudah diberi label kerahasiaan      | ≥80%   | 3 bulan sekali | Sampling 10 file/data per OPD, cek ada/tidak label "Rahasia/ Terbatas" |
-| Jumlah laporan akses tidak wajar ke data sensitif                | 0      | Bulanan        | Hitung laporan dari pengguna tentang akses mencurigakan                |
-| Persentase data kritikal yang sudah dicadangkan                  | 100%   | Mingguan       | Checklist manual \- verifikasi file backup ada dan timestamp terbaru   |
-| Kepatuhan terhadap jadwal penghapusan data kedaluwarsa           | ≥90%   | 6 bulan sekali | Cek daftar data yang seharusnya sudah dihapus vs realisasi             |
-| Persentase form persetujuan pemrosesan data pribadi yang lengkap | 100%   | Bulanan        | Review dokumen form persetujuan di setiap layanan publik               |
-| Persentase data sensitif yang disimpan dalam bentuk terenkripsi  | ≥70%   | 3 bulan sekali | Test buka file \- jika butuh password/kunci \= terenkripsi             |
+| Indikator Kinerja                                                | Target | Frekuensi         | Cara Pengukuran                                                        |
+| :--------------------------------------------------------------- | :----- | :---------------- | :--------------------------------------------------------------------- |
+| Persentase data penting yang sudah diberi label kerahasiaan      | ≥80%   | 6 bulan sekali    | Sampling 10 file/data per OPD, cek ada/tidak label "Rahasia/ Terbatas" |
+| Jumlah laporan akses tidak wajar ke data sensitif                | ≤ 1    | 12 bulan sekali   | Hitung laporan dari pengguna tentang akses mencurigakan                |
+| Persentase data kritikal yang sudah dicadangkan                  | 100%   | 1 Minggu   sekali | Checklist manual \- verifikasi file backup ada dan timestamp terbaru   |
+| Kepatuhan terhadap jadwal penghapusan data kedaluwarsa           | ≥90%   | 6 bulan sekali    | Cek daftar data yang seharusnya sudah dihapus vs realisasi             |
+| Persentase form persetujuan pemrosesan data pribadi yang lengkap | 100%   | 6 bulan sekali    | Review dokumen form persetujuan di setiap layanan publik               |
+| Persentase data sensitif yang disimpan dalam bentuk terenkripsi  | ≥70%   | 3 bulan sekali    | Test buka file \- jika butuh password/kunci \= terenkripsi             |
 
      
 
@@ -1941,14 +1922,14 @@ Pemantauan dan pengukuran kinerja SMKI dilakukan untuk mengevaluasi efektivitas 
         
   * **Infrastruktur SPBE**
 
-| Metrik                                              | Target | Frekuensi      | Cara Pengukuran                                     |
-| :-------------------------------------------------- | :----- | :------------- | :-------------------------------------------------- |
-| Uptime server dan jaringan                          | ≥95%   | Harian         | Ping test dan cek service utama berjalan normal     |
-| Persentase device dengan antivirus aktif dan update | 100%   | Mingguan       | Cek icon antivirus dan last update date             |
-| Keandalan sistem backup power                       | 100%   | Bulanan        | Test battery backup \- cabut listrik, cek UPS hidup |
-| Kesesuaian suhu dan kebersihan ruang server         | 100%   | Harian         | Checklist visual \- suhu, kebersihan, kerapian      |
-| Kondisi fisik dan konfigurasi dasar perangkat       | 100%   | 3 bulan sekali | Pemeriksaan visual dan cek config minimal           |
-| Utilisasi storage tidak melebihi ambang batas       | ≤80%   | Bulanan        | Cek free space pada server dan storage device       |
+| Metrik                                              | Target | Frekuensi       | Cara Pengukuran                                     |
+| :-------------------------------------------------- | :----- | :-------------- | :-------------------------------------------------- |
+| Uptime server dan jaringan                          | ≥95%   | 6 bulan sekali  | Ping test dan cek service utama berjalan normal     |
+| Persentase device dengan antivirus aktif dan update | 80%    | 1 bulan sekali  | Cek status antivirus dan update terakhir            |
+| Keandalan sistem backup power                       | 100%   | 12 bulan sekali | Test battery backup \- cabut listrik, cek UPS hidup |
+| Kesesuaian suhu dan kebersihan ruang server         | 100%   | 1 bulan sekali  | Checklist visual \- suhu, kebersihan, kerapian      |
+| Kondisi fisik dan konfigurasi dasar perangkat       | 100%   | 6 bulan sekali  | Pemeriksaan visual dan cek config minimal           |
+| Utilisasi storage tidak melebihi ambang batas       | ≤80%   | 6 bulan sekali  | Cek free space pada server dan storage device       |
 
     
 
@@ -1966,9 +1947,9 @@ Pemantauan dan pengukuran kinerja SMKI dilakukan untuk mengevaluasi efektivitas 
 | :------------------------------------------------ | :--------------- | :------------- | :------------------------------------------ |
 | Persentase pegawai mengikuti sosialisasi keamanan | ≥80%             | 6 bulan sekali | Daftar hadir training dan sesi awareness    |
 | Persentase pegawai menggunakan password kuat      | ≥90%             | 3 bulan sekali | Survey sederhana \- tanya policy password   |
-| Jumlah laporan kejadian mencurigakan dari pegawai | ≥3 laporan/bulan | Bulanan        | Hitung laporan yang masuk via email/telepon |
-| Kepatuhan clean desk policy                       | ≥85%             | Bulanan        | Pemeriksaan mendadak \- cek dokumen di meja |
-| Kepatuhan clear screen policy                     | ≥90%             | Mingguan       | Pemeriksaan random \- cek komputer terkunci |
+| Jumlah laporan kejadian mencurigakan dari pegawai | ≤3 laporan/bulan | 1 bulan sekali | Hitung laporan yang masuk via email/telepon |
+| Kepatuhan clean desk policy                       | ≥70%             | 6 bulan sekali | Pemeriksaan mendadak \- cek dokumen di meja |
+| Kepatuhan clear screen policy                     | ≥70%             | 6 bulan sekali | Pemeriksaan random \- cek komputer terkunci |
 | Kesesuaian hak akses dengan job description       | 100%             | 6 bulan sekali | Review user access vs tugas pokok           |
 
     
@@ -1981,14 +1962,13 @@ Pemantauan dan pengukuran kinerja SMKI dilakukan untuk mengevaluasi efektivitas 
 
   * **Manajemen**
 
-| Metrik                                         | Target       | Frekuensi   | Cara Pengukuran                              |
-| :--------------------------------------------- | :----------- | :---------- | :------------------------------------------- |
-| Keterlaksanaan rapat SMKI                      | 100%         | Bulanan     | Notulen rapat dan daftar hadir               |
-| Ketersediaan dan update kebijakan keamanan     | 100%         | Tahunan     | Review dokumen kebijakan \- versi dan konten |
-| Kepatuhan terhadap prosedur penanganan insiden | 100%         | Per insiden | Cek laporan insiden lengkap dengan timeline  |
-| Kepatuhan vendor terhadap klausul keamanan     | 100%         | Per kontrak | Review dokumen kontrak dan laporan vendor    |
-| Jumlah improvement yang diimplementasi         | ≥5 per tahun | Tahunan     | Daftar improvement yang sudah dilakukan      |
-| Persentase risiko yang sudah ditangani         | ≥90%         | Triwulanan  | Review risk register \- status mitigasi      |
+| Metrik                                                    | Target       | Frekuensi       | Cara Pengukuran                              |
+| :-------------------------------------------------------- | :----------- | :-------------- | :------------------------------------------- |
+| Keterlaksanaan rapat SMKI                                 | 100%         | 6 bulan sekali  | Notulen rapat dan daftar hadir               |
+| Ketersediaan dan update kebijakan keamanan                | 100%         | 24 bulan sekali | Review dokumen kebijakan \- versi dan konten |
+| Kepatuhan terhadap prosedur penanganan insiden            | 100%         | Per insiden     | Cek laporan insiden lengkap dengan timeline  |
+| Jumlah peningkatan manajemen keamanan yang diimplementasi | ≥3 per tahun | Tahunan         | Daftar improvement yang sudah dilakukan      |
+| Persentase risiko yang sudah ditangani                    | ≥70%         | 6 bulan sekali  | Review risk register \- status mitigasi      |
 
     
 
@@ -2021,14 +2001,14 @@ Untuk memastikan kesesuaian, kecukupan, dan efektivitas penerapan Pedoman SMKI S
 
 1. **Pelaksanaan dan Tujuan**  
    - Pemerintah Kota Mojokerto memfasilitasi audit eksternal oleh pihak ketiga independen  
-   - Auditor eksternal: **BSSN, BPKP, atau auditor bersertifikat**  
+   - Auditor eksternal: **BSSN atau auditor bersertifikat**  
    - Dilakukan sesuai kebutuhan untuk sertifikasi atau memenuhi regulasi pusat  
 2. **Ruang Lingkup**  
    - Kesesuaian dengan standar nasional SPBE  
    - Pemenuhan regulasi pemerintah pusat  
    - Benchmarking dengan best practices e-government
 
-#### **6.2.3 Management Review (Review Manajemen) SPBE** {#6.2.3-management-review-(review-manajemen)-spbe}
+#### **6.2.3 Management Review Keamanan SPBE** {#6.2.3-management-review-keamanan-spbe}
 
 1. **Pelaksanaan dan Peserta**  
    - Dilakukan **minimal satu kali dalam setahun**  
@@ -2131,83 +2111,83 @@ Keberhasilan penerapan SMKI SPBE bergantung pada komitmen pimpinan, kedisiplinan
 
 Berdasarkan Pasal 26 dan 27 Peraturan BSSN Nomor 4 Tahun 2021
 
-| No   | Fungsi Keamanan                    | Standar Teknis                                                       | Referensi Pedoman SMKI                                                            |
-| :--- | :--------------------------------- | :------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
-| 1    | Autentikasi                        | a. Menggunakan manajemen kata sandi                                  | Bab 5.7.2 \- Manajemen Kata Sandi & Autentikasi                                   |
-|      |                                    | b. Verifikasi kata sandi pada sisi server                            | Bab 5.6.1 \- Autentikasi dan Manajemen Sesi Web                                   |
-|      |                                    | c. Mengatur karakter, kombinasi, dan masa berlaku kata sandi         | Bab 5.7.2 \- Tabel Kebijakan Password                                             |
-|      |                                    | d. Mengatur jumlah maksimum kesalahan input kata sandi               | Bab 5.7.2 \- Tabel (Percobaan gagal sebelum lockout)                              |
-|      |                                    | e. Mengatur mekanisme pemulihan kata sandi                           | Bab 5.7.2 \- Tabel Kebijakan Password (Pemulihan kata sandi & masa berlaku)       |
-|      |                                    | f. Menjaga kerahasiaan kata sandi dengan kriptografi                 | Bab 5.8.1 \- Enkripsi Data                                                        |
-|      |                                    | g. Menggunakan jalur komunikasi aman untuk autentikasi               | Bab 5.6.1 \- Keamanan Komunikasi Web (HTTPS/TLS)                                  |
-| 2    | Manajemen Sesi                     | a. Menggunakan pengendali sesi                                       | Bab 5.6.1 \- Manajemen Sesi yang Aman                                             |
-|      |                                    | b. Menggunakan pengendali sesi dari kerangka kerja                   | Bab 5.6.1 \- Manajemen Sesi yang Aman                                             |
-|      |                                    | c. Mengatur pembuatan dan keacakan token sesi                        | Bab 5.6.1 \- Manajemen Sesi yang Aman                                             |
-|      |                                    | d. Mengatur kondisi dan jangka waktu habis sesi                      | Bab 5.6.1 \- Manajemen Sesi yang Aman (Session Timeout)                           |
-|      |                                    | e. Validasi dan pencantuman session id                               | Bab 5.6.1 \- Manajemen Sesi yang Aman                                             |
-|      |                                    | f. Pelindungan lokasi dan pengiriman token                           | Bab 5.6.1 \- Manajemen Sesi yang Aman (Secure Flag, HttpOnly)                     |
-|      |                                    | g. Pelindungan terhadap duplikasi dan mekanisme persetujuan          | Bab 5.6.1 \- Manajemen Sesi yang Aman                                             |
-| 3    | Kontrol Akses                      | a. Menetapkan otorisasi pengguna                                     | Bab 5.6.1 \- Kontrol Akses dan Otorisasi Web (RBAC)                               |
-|      |                                    | b. Peringatan terhadap serangan otomatis                             | Bab 5.6.1 \- Validasi dan Sanitasi Input Web (Rate Limiting)                      |
-|      |                                    | c. Mengatur antarmuka sisi administrator                             | Bab 5.6.1 \- Kontrol Akses dan Otorisasi Web                                      |
-|      |                                    | d. Verifikasi kebenaran token saat akses data                        | Bab 5.6.1 \- Kontrol Akses dan Otorisasi Web                                      |
-| 4    | Validasi Input                     | a. Validasi input pada sisi server                                   | Bab 5.6.1 \- Validasi dan Sanitasi Input Web                                      |
-|      |                                    | b. Penolakan input jika validasi gagal                               | Bab 5.6.1 \- Validasi dan Sanitasi Input Web                                      |
-|      |                                    | c. Memastikan runtime environment tidak rentan                       | Bab 5.9.1 \- Manajemen Konfigurasi & Patch                                        |
-|      |                                    | d. Melakukan validasi positif pada seluruh input                     | Bab 5.6.1 \- Validasi dan Sanitasi Input Web (Whitelist Approach)                 |
-|      |                                    | e. Filter terhadap data yang tidak dipercaya                         | Bab 5.6.1 \- Validasi dan Sanitasi Input Web                                      |
-|      |                                    | f. Menggunakan fitur kode dinamis                                    | Bab 5.6.1 \- Validasi dan Sanitasi Input Web                                      |
-|      |                                    | g. Pelindungan terhadap akses mengandung konten skrip                | Bab 5.6.1 \- Proteksi Terhadap OWASP Top 10 (XSS)                                 |
-|      |                                    | h. Pelindungan dari serangan injeksi basis data                      | Bab 5.6.1 \- Proteksi Terhadap OWASP Top 10 (SQL Injection)                       |
-| 5    | Kriptografi pada Verifikasi Statis | a. Menggunakan algoritma, modul, protokol, dan kunci sesuai UU       | Bab 5.8.1 \- Standar Kriptografi (Mengacu BSSN No. 443/2025)                      |
-|      |                                    | b. Melakukan autentikasi data yang dienkripsi                        | Bab 5.8.1 \- Enkripsi Data                                                        |
-|      |                                    | c. Menerapkan manajemen kunci kriptografi                            | Bab 5.8.1 \- Key Management                                                       |
-|      |                                    | d. Membuat angka acak dengan generator kriptografi                   | Bab 5.8.1 \- Standar Kriptografi                                                  |
-| 6    | Penanganan Error & Logging         | a. Mengatur konten pesan error                                       | Bab 5.6.1 \- Error Handling dan Logging Web                                       |
-|      |                                    | b. Menggunakan metode penanganan error                               | Bab 5.6.1 \- Error Handling dan Logging Web                                       |
-|      |                                    | c. Tidak mencantumkan informasi sensitif dalam log                   | Bab 5.6.1 \- Error Handling dan Logging Web                                       |
-|      |                                    | d. Mengatur cakupan log untuk investigasi                            | Bab 5.9.2 \- Logging & Monitoring Sistem                                          |
-|      |                                    | e. Melindungi log dari akses/modifikasi tidak sah                    | Bab 5.9.2 \- Penyimpanan dan Keamanan Log                                         |
-|      |                                    | f. Enkripsi data untuk cegah injeksi log                             | Bab 5.8.1 \- Enkripsi Data                                                        |
-|      |                                    | g. Sinkronisasi waktu dengan zona waktu yang benar                   | Bab 5.9.2 \- Kebijakan Logging (NTP)                                              |
-| 7    | Proteksi Data                      | a. Identifikasi dan penyimpanan salinan informasi sensitif           | Bab 5.1.3 \- Klasifikasi Aset; Bab 5.11.2 \- Backup & Recovery                    |
-|      |                                    | b. Pelindungan akses tidak sah ke data sementara                     | Bab 5.8 \- Proteksi Data & Privasi                                                |
-|      |                                    | c. Pertukaran, penghapusan, dan audit informasi sensitif             | Bab 5.8.3 \- Retention & Disposal Policy                                          |
-|      |                                    | d. Penentuan jumlah parameter                                        | Bab 5.6.1 \- Validasi dan Sanitasi Input Web                                      |
-|      |                                    | e. Memastikan data disimpan dengan aman                              | Bab 5.8.1 \- Enkripsi Data at Rest                                                |
-|      |                                    | f. Metode penghapusan dan ekspor data sesuai permintaan              | Bab 5.8.3 \- Retention & Disposal Policy; Bab 5.8.4 \- Hak Subjek Data            |
-|      |                                    | g. Membersihkan memori setelah tidak diperlukan                      | Bab 5.6.1 \- Keamanan Aplikasi Web (Secure Coding)                                |
-| 8    | Keamanan Komunikasi                | a. Menggunakan komunikasi terenkripsi                                | Bab 5.6.1 \- Keamanan Komunikasi Web (HTTPS/TLS)                                  |
-|      |                                    | b. Mengatur koneksi masuk/keluar yang aman dari sisi pengguna        | Bab 5.6.1 \- Keamanan Komunikasi Web                                              |
-|      |                                    | c. Mengatur jenis algoritma dan alat pengujian                       | Bab 5.8.1 \- Standar Kriptografi                                                  |
-|      |                                    | d. Mengatur aktivasi dan konfigurasi sertifikat elektronik           | Bab 5.6.1 \- Certificate Management                                               |
-| 9    | Pengendalian Kode Berbahaya        | a. Menggunakan analisis kode                                         | Bab 5.6.1 \- Secure Software Development Lifecycle (SSDLC) \- Fase Testing (SAST) |
-|      |                                    | b. Memastikan kode sumber bebas dari kode berbahaya                  | Bab 5.6.1 \- Dependency dan Third-Party Component Management (SCA)                |
-|      |                                    | c. Mengatur izin fitur/sensor terkait privasi                        | Bab 5.8.4 \- Privacy by Design                                                    |
-|      |                                    | d. Mengatur pelindungan integritas                                   | Bab 5.6.1 \- Dependency Management (Integrity Checks)                             |
-|      |                                    | e. Mengatur mekanisme fitur pembaruan                                | Bab 5.9.1 \- Manajemen Konfigurasi & Patch; Bab 5.9.3 \- Change Management        |
-| 10   | Logika Bisnis                      | a. Memproses alur logika bisnis dalam urutan dan waktu realistis     | Bab 5.6.1 \- Keamanan Aplikasi Web (Business Logic)                               |
-|      |                                    | b. Memastikan logika bisnis memiliki batasan dan validasi            | Bab 5.6.1 \- Kontrol Akses dan Otorisasi Web                                      |
-|      |                                    | c. Memonitor aktivitas yang tidak biasa                              | Bab 5.9.2 \- Logging & Monitoring Sistem; Bab 5.6.1 \- Monitoring & Logging Web   |
-|      |                                    | d. Membantu dalam kontrol anti-otomatisasi                           | Bab 5.6.1 \- Validasi dan Sanitasi Input Web (Rate Limiting, CAPTCHA)             |
-|      |                                    | e. Peringatan untuk serangan otomatis/aktivitas tidak biasa          | Bab 5.9.2 \- Monitoring & Analisis Log (Alerting)                                 |
-| 11   | Keamanan File                      | a. Mengatur jumlah file dan kuota ukuran unggahan                    | Bab 5.6.1 \- Validasi dan Sanitasi Input Web (File Upload Security)               |
-|      |                                    | b. Validasi file sesuai tipe konten                                  | Bab 5.6.1 \- Validasi dan Sanitasi Input Web (File Upload Security)               |
-|      |                                    | c. Pelindungan terhadap metadata input dan file                      | Bab 5.6.1 \- Validasi dan Sanitasi Input Web                                      |
-|      |                                    | d. Pemindaian file dari sumber tidak dipercaya                       | Bab 5.6.1 \- Validasi dan Sanitasi Input Web (File Upload Security)               |
-|      |                                    | e. Konfigurasi server untuk unduh file sesuai ekstensi               | Bab 5.6.1 \- Validasi dan Sanitasi Input Web (File Upload Security)               |
-| 12   | Keamanan API & Web Service         | a. Melakukan konfigurasi layanan web                                 | Bab 5.5.2 \- Keamanan Sistem Penghubung Layanan (API Gateway)                     |
-|      |                                    | b. Memverifikasi URI API tidak menampilkan celah keamanan            | Bab 5.5.2 \- Validasi dan Sanitasi Input API                                      |
-|      |                                    | c. Membuat keputusan otorisasi                                       | Bab 5.5.2 \- Kontrol Akses dan Autentikasi Sistem Penghubung Layanan              |
-|      |                                    | d. Menampilkan metode RESTful HTTP jika input valid                  | Bab 5.5.2 \- Arsitektur dan Desain Sistem Penghubung Layanan                      |
-|      |                                    | e. Menggunakan validasi skema dan verifikasi input                   | Bab 5.5.2 \- Validasi dan Sanitasi Input API                                      |
-|      |                                    | f. Menggunakan metode pelindungan layanan berbasis web               | Bab 5.5.2 \- Keamanan Data dalam Sistem Penghubung Layanan                        |
-|      |                                    | g. Menerapkan kontrol anti-otomatisasi                               | Bab 5.5.2 \- Kontrol Akses dan Autentikasi (Rate Limiting)                        |
-| 13   | Keamanan Konfigurasi               | a. Mengonfigurasi server sesuai rekomendasi                          | Bab 5.9.1 \- Manajemen Konfigurasi & Patch (Secure Baseline)                      |
-|      |                                    | b. Mendokumentasi, menyalin konfigurasi, dan dependensi              | Bab 5.9.1 \- Manajemen Konfigurasi & Patch; Bab 4.4.4 \- Informasi Terdokumentasi |
-|      |                                    | c. Menghapus fitur, dokumentasi, sampel, dan konfigurasi tidak perlu | Bab 5.9.1 \- Standarisasi Konfigurasi Sistem (Hardening)                          |
-|      |                                    | d. Memvalidasi integritas aset yang diakses eksternal                | Bab 5.9.1 \- Manajemen Konfigurasi & Patch (Audit Konfigurasi)                    |
-|      |                                    | e. Menggunakan respons aplikasi dan konten yang aman                 | Bab 5.6.1 \- Error Handling dan Logging Web; Bab 5.6.1 \- HTTP Security Headers   |
+| No   | Fungsi Keamanan                    | Standar Teknis                                                                                                                                                                             | Referensi Pedoman SMKI                                                                                                                                                |
+| :--- | :--------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Autentikasi                        | a. Menggunakan manajemen kata sandi. Memastikan penerapan manajemen kata sandi yang memadai dalam rangka proses autentikasi yang efektif. OWASP ASVS v.4.0.3 – 2                           | [Bab 5.7.2 – Manajemen Kata Sandi & Autentikasi](#5.7.2-manajemen-kata-sandi-&-autentikasi)                                                                           |
+|      |                                    | b. Verifikasi kata sandi pada sisi server. Memastikan bahwa tidak ada penggunaan kata sandi yang masuk dalam kategori lemah. OWASP ASVS v.4.0.3 – 2.2.1                                    | [Bab 5.6.1 – Autentikasi dan Manajemen Sesi Web](#5.6.1-keamanan-aplikasi-web)                                                                                        |
+|      |                                    | c. Mengatur karakter, kombinasi, dan masa berlaku kata sandi                                                                                                                               | [Bab 5.7.2 – Tabel Kebijakan Password](#5.7.2-manajemen-kata-sandi-&-autentikasi)                                                                                     |
+|      |                                    | d. Mengatur jumlah maksimum kesalahan input kata sandi. Melindungi sistem dari percobaan menebak             kata sandi dan akses ilagal ke sistem. OWASP ASVS v.4.0.3 – 2.1.1;2.1.2;2.1.4 | [Bab 5.7.2 – Tabel (Percobaan gagal sebelum lockout)](#5.7.2-manajemen-kata-sandi-&-autentikasi)                                                                      |
+|      |                                    | e. Mengatur mekanisme pemulihan kata sandi                                                                                                                                                 | [Bab 5.7.2 – Tabel Kebijakan Password (Pemulihan kata sandi & masa berlaku)](#5.7.2-manajemen-kata-sandi-&-autentikasi)                                               |
+|      |                                    | f. Menjaga kerahasiaan kata sandi dengan kriptografi                                                                                                                                       | [Bab 5.8.1 – Enkripsi Data](#5.8.1-enkripsi)                                                                                                                          |
+|      |                                    | g. Menggunakan jalur komunikasi aman untuk autentikasi                                                                                                                                     | [Bab 5.6.1 – Keamanan Komunikasi Web (HTTPS/TLS)](#5.6.1-keamanan-aplikasi-web)                                                                                       |
+| 2    | Manajemen Sesi                     | a. Menggunakan pengendali sesi                                                                                                                                                             | [Bab 5.6.1 – Manajemen Sesi yang Aman](#5.6.1-keamanan-aplikasi-web)                                                                                                  |
+|      |                                    | b. Menggunakan pengendali sesi dari kerangka kerja                                                                                                                                         | [Bab 5.6.1 – Manajemen Sesi yang Aman](#5.6.1-keamanan-aplikasi-web)                                                                                                  |
+|      |                                    | c. Mengatur pembuatan dan keacakan token sesi                                                                                                                                              | [Bab 5.6.1 – Manajemen Sesi yang Aman](#5.6.1-keamanan-aplikasi-web)                                                                                                  |
+|      |                                    | d. Mengatur kondisi dan jangka waktu habis sesi                                                                                                                                            | [Bab 5.6.1 – Manajemen Sesi yang Aman (Session Timeout)](#5.6.1-keamanan-aplikasi-web)                                                                                |
+|      |                                    | e. Validasi dan pencantuman session id                                                                                                                                                     | [Bab 5.6.1 – Manajemen Sesi yang Aman](#5.6.1-keamanan-aplikasi-web)                                                                                                  |
+|      |                                    | f. Pelindungan lokasi dan pengiriman token                                                                                                                                                 | [Bab 5.6.1 – Manajemen Sesi yang Aman (Secure Flag, HttpOnly)](#5.6.1-keamanan-aplikasi-web)                                                                          |
+|      |                                    | g. Pelindungan terhadap duplikasi dan mekanisme persetujuan                                                                                                                                | [Bab 5.6.1 – Manajemen Sesi yang Aman](#5.6.1-keamanan-aplikasi-web)                                                                                                  |
+| 3    | Kontrol Akses                      | a. Menetapkan otorisasi pengguna                                                                                                                                                           | [Bab 5.6.1 – Kontrol Akses dan Otorisasi Web (RBAC)](#5.6.1-keamanan-aplikasi-web)                                                                                    |
+|      |                                    | b. Peringatan terhadap serangan otomatis                                                                                                                                                   | [Bab 5.6.1 – Validasi dan Sanitasi Input Web (Rate Limiting)](#5.6.1-keamanan-aplikasi-web)                                                                           |
+|      |                                    | c. Mengatur antarmuka sisi administrator                                                                                                                                                   | [Bab 5.6.1 – Kontrol Akses dan Otorisasi Web](#5.6.1-keamanan-aplikasi-web)                                                                                           |
+|      |                                    | d. Verifikasi kebenaran token saat akses data                                                                                                                                              | [Bab 5.6.1 – Kontrol Akses dan Otorisasi Web](#5.6.1-keamanan-aplikasi-web)                                                                                           |
+| 4    | Validasi Input                     | a. Validasi input pada sisi server                                                                                                                                                         | [Bab 5.6.1 – Validasi dan Sanitasi Input Web](#5.6.1-keamanan-aplikasi-web)                                                                                           |
+|      |                                    | b. Penolakan input jika validasi gagal                                                                                                                                                     | [Bab 5.6.1 – Validasi dan Sanitasi Input Web](#5.6.1-keamanan-aplikasi-web)                                                                                           |
+|      |                                    | c. Memastikan runtime environment tidak rentan                                                                                                                                             | [Bab 5.9.1 – Manajemen Konfigurasi & Patch](#5.9.1-manajemen-konfigurasi-&-patch)                                                                                     |
+|      |                                    | d. Melakukan validasi positif pada seluruh input                                                                                                                                           | [Bab 5.6.1 – Validasi dan Sanitasi Input Web (Whitelist Approach)](#5.6.1-keamanan-aplikasi-web)                                                                      |
+|      |                                    | e. Filter terhadap data yang tidak dipercaya                                                                                                                                               | [Bab 5.6.1 – Validasi dan Sanitasi Input Web](#5.6.1-keamanan-aplikasi-web)                                                                                           |
+|      |                                    | f. Menggunakan fitur kode dinamis                                                                                                                                                          | [Bab 5.6.1 – Validasi dan Sanitasi Input Web](#5.6.1-keamanan-aplikasi-web)                                                                                           |
+|      |                                    | g. Pelindungan terhadap akses mengandung konten skrip                                                                                                                                      | [Bab 5.6.1 – Proteksi Terhadap OWASP Top 10 (XSS)](#5.6.1-keamanan-aplikasi-web)                                                                                      |
+|      |                                    | h. Pelindungan dari serangan injeksi basis data                                                                                                                                            | [Bab 5.6.1 – Proteksi Terhadap OWASP Top 10 (SQL Injection)](#5.6.1-keamanan-aplikasi-web)                                                                            |
+| 5    | Kriptografi pada Verifikasi Statis | a. Menggunakan algoritma, modul, protokol, dan kunci sesuai UU                                                                                                                             | [Bab 5.8.1 – Enkripsi Data (Standar Kriptografi mengacu BSSN No. 443/2025)](#5.8.1-enkripsi)                                                                          |
+|      |                                    | b. Melakukan autentikasi data yang dienkripsi                                                                                                                                              | [Bab 5.8.1 – Enkripsi Data](#5.8.1-enkripsi)                                                                                                                          |
+|      |                                    | c. Menerapkan manajemen kunci kriptografi                                                                                                                                                  | [Bab 5.8.1 – Enkripsi Data (Key Management)](#5.8.1-enkripsi)                                                                                                         |
+|      |                                    | d. Membuat angka acak dengan generator kriptografi                                                                                                                                         | [Bab 5.8.1 – Enkripsi Data (Random Number Generation)](#5.8.1-enkripsi)                                                                                               |
+| 6    | Penanganan Error & Logging         | a. Mengatur konten pesan error                                                                                                                                                             | [Bab 5.6.1 – Error Handling dan Logging Web](#5.6.1-keamanan-aplikasi-web)                                                                                            |
+|      |                                    | b. Menggunakan metode penanganan error                                                                                                                                                     | [Bab 5.6.1 – Error Handling dan Logging Web](#5.6.1-keamanan-aplikasi-web)                                                                                            |
+|      |                                    | c. Tidak mencantumkan informasi sensitif dalam log                                                                                                                                         | [Bab 5.6.1 – Error Handling dan Logging Web](#5.6.1-keamanan-aplikasi-web)                                                                                            |
+|      |                                    | d. Mengatur cakupan log untuk investigasi                                                                                                                                                  | [Bab 5.9.2 – Logging & Monitoring Sistem](#5.9.2-error-handling,-logging-dan-monitoring-sistem)                                                                       |
+|      |                                    | e. Melindungi log dari akses/modifikasi tidak sah                                                                                                                                          | [Bab 5.9.2 – Penyimpanan dan Keamanan Log](#5.9.2-error-handling,-logging-dan-monitoring-sistem)                                                                      |
+|      |                                    | f. Enkripsi data untuk cegah injeksi log                                                                                                                                                   | [Bab 5.8.1 – Enkripsi Data](#5.8.1-enkripsi)                                                                                                                          |
+|      |                                    | g. Sinkronisasi waktu dengan zona waktu yang benar                                                                                                                                         | [Bab 5.9.2 – Kebijakan Logging (NTP)](#5.9.2-error-handling,-logging-dan-monitoring-sistem)                                                                           |
+| 7    | Proteksi Data                      | a. Identifikasi dan penyimpanan salinan informasi sensitif                                                                                                                                 | [Bab 5.1.3 – Klasifikasi Aset](#5.1.3-klasifikasi-tingkat-kerahasiaan-aset-informasi); [Bab 5.11.2 – Backup & Recovery](#5.11.2-backup-&-recovery-data)               |
+|      |                                    | b. Pelindungan akses tidak sah ke data sementara                                                                                                                                           | [Bab 5.8 – Proteksi Data](#5.8-proteksi-data)                                                                                                                         |
+|      |                                    | c. Pertukaran, penghapusan, dan audit informasi sensitif                                                                                                                                   | [Bab 5.8.4 – Kebijakan Retensi dan Pemusnahan Data](#5.8.4-kebijakan-retensi-dan-pemusnahan-data)                                                                     |
+|      |                                    | d. Penentuan jumlah parameter                                                                                                                                                              | [Bab 5.6.1 – Validasi dan Sanitasi Input Web](#5.6.1-keamanan-aplikasi-web)                                                                                           |
+|      |                                    | e. Memastikan data disimpan dengan aman                                                                                                                                                    | [Bab 5.8.1 – Enkripsi Data](#5.8.1-enkripsi)                                                                                                                          |
+|      |                                    | f. Metode penghapusan dan ekspor data sesuai permintaan                                                                                                                                    | [Bab 5.8.4 – Kebijakan Retensi dan Pemusnahan Data](#5.8.4-kebijakan-retensi-dan-pemusnahan-data)                                                                     |
+|      |                                    | g. Membersihkan memori setelah tidak diperlukan                                                                                                                                            | [Bab 5.6.1 – Keamanan Aplikasi Web (Secure Coding)](#5.6.1-keamanan-aplikasi-web)                                                                                     |
+| 8    | Keamanan Komunikasi                | a. Menggunakan komunikasi terenkripsi                                                                                                                                                      | [Bab 5.6.1 – Keamanan Komunikasi Web (HTTPS/TLS)](#5.6.1-keamanan-aplikasi-web)                                                                                       |
+|      |                                    | b. Mengatur koneksi masuk/keluar yang aman dari sisi pengguna                                                                                                                              | [Bab 5.6.1 – Keamanan Komunikasi Web](#5.6.1-keamanan-aplikasi-web)                                                                                                   |
+|      |                                    | c. Mengatur jenis algoritma dan alat pengujian                                                                                                                                             | [Bab 5.8.1 – Standar Kriptografi](#5.8.1-enkripsi)                                                                                                                    |
+|      |                                    | d. Mengatur aktivasi dan konfigurasi sertifikat elektronik                                                                                                                                 | [Bab 5.6.1 – Certificate Management](#5.6.1-keamanan-aplikasi-web)                                                                                                    |
+| 9    | Pengendalian Kode Berbahaya        | a. Menggunakan analisis kode                                                                                                                                                               | [Bab 5.6.1 – Secure Software Development Lifecycle (SSDLC) \- Fase Testing (SAST)](#5.6.1-keamanan-aplikasi-web)                                                      |
+|      |                                    | b. Memastikan kode sumber bebas dari kode berbahaya                                                                                                                                        | [Bab 5.6.1 – Dependency dan Third-Party Component Management (SCA)](#5.6.1-keamanan-aplikasi-web)                                                                     |
+|      |                                    | c. Mengatur izin fitur/sensor terkait privasi                                                                                                                                              | [Bab 5.8.5 – Privacy by Design](#5.8.5-privacy-by-design)                                                                                                             |
+|      |                                    | d. Mengatur pelindungan integritas                                                                                                                                                         | [Bab 5.6.1 – Dependency Management (Integrity Checks)](#5.6.1-keamanan-aplikasi-web)                                                                                  |
+|      |                                    | e. Mengatur mekanisme fitur pembaruan                                                                                                                                                      | [Bab 5.9.1 – Manajemen Konfigurasi & Patch](#5.9.1-manajemen-konfigurasi-&-patch); [Bab 5.9.3 – Change Management](#5.9.3-change-management)                          |
+| 10   | Logika Bisnis                      | a. Memproses alur logika bisnis dalam urutan dan waktu realistis                                                                                                                           | [Bab 5.6.1 – Keamanan Aplikasi Web (Business Logic)](#5.6.1-keamanan-aplikasi-web)                                                                                    |
+|      |                                    | b. Memastikan logika bisnis memiliki batasan dan validasi                                                                                                                                  | [Bab 5.6.1 – Kontrol Akses dan Otorisasi Web](#5.6.1-keamanan-aplikasi-web)                                                                                           |
+|      |                                    | c. Memonitor aktivitas yang tidak biasa                                                                                                                                                    | [Bab 5.9.2 – Logging & Monitoring Sistem](#5.9.2-error-handling,-logging-dan-monitoring-sistem); [Bab 5.6.1 – Monitoring & Logging Web](#5.6.1-keamanan-aplikasi-web) |
+|      |                                    | d. Membantu dalam kontrol anti-otomatisasi                                                                                                                                                 | [Bab 5.6.1 – Validasi dan Sanitasi Input Web (Rate Limiting, CAPTCHA)](#5.6.1-keamanan-aplikasi-web)                                                                  |
+|      |                                    | e. Peringatan untuk serangan otomatis/aktivitas tidak biasa                                                                                                                                | [Bab 5.9.2 – Monitoring & Analisis Log (Alerting)](#5.9.2-error-handling,-logging-dan-monitoring-sistem)                                                              |
+| 11   | Keamanan File                      | a. Mengatur jumlah file dan kuota ukuran unggahan                                                                                                                                          | [Bab 5.6.1 – Validasi dan Sanitasi Input Web (File Upload Security)](#5.6.1-keamanan-aplikasi-web)                                                                    |
+|      |                                    | b. Validasi file sesuai tipe konten                                                                                                                                                        | [Bab 5.6.1 – Validasi dan Sanitasi Input Web (File Upload Security)](#5.6.1-keamanan-aplikasi-web)                                                                    |
+|      |                                    | c. Pelindungan terhadap metadata input dan file                                                                                                                                            | [Bab 5.6.1 – Validasi dan Sanitasi Input Web](#5.6.1-keamanan-aplikasi-web)                                                                                           |
+|      |                                    | d. Pemindaian file dari sumber tidak dipercaya                                                                                                                                             | [Bab 5.6.1 – Validasi dan Sanitasi Input Web (File Upload Security)](#5.6.1-keamanan-aplikasi-web)                                                                    |
+|      |                                    | e. Konfigurasi server untuk unduh file sesuai ekstensi                                                                                                                                     | [Bab 5.6.1 – Validasi dan Sanitasi Input Web (File Upload Security)](#5.6.1-keamanan-aplikasi-web)                                                                    |
+| 12   | Keamanan API & Web Service         | a. Melakukan konfigurasi layanan web                                                                                                                                                       | [Bab 5.6.3 – Keamanan Sistem Penghubung Layanan (API Gateway)](#5.6.3-keamanan-integrasi-dan-api)                                                                     |
+|      |                                    | b. Memverifikasi URI API tidak menampilkan celah keamanan                                                                                                                                  | [Bab 5.6.3 – Validasi dan Sanitasi Input API](#5.6.3-keamanan-integrasi-dan-api)                                                                                      |
+|      |                                    | c. Membuat keputusan otorisasi                                                                                                                                                             | [Bab 5.6.3 – Kontrol Akses dan Autentikasi Sistem Penghubung Layanan](#5.6.3-keamanan-integrasi-dan-api)                                                              |
+|      |                                    | d. Menampilkan metode RESTful HTTP jika input valid                                                                                                                                        | [Bab 5.6.3 – Arsitektur dan Desain Sistem Penghubung Layanan](#5.6.3-keamanan-integrasi-dan-api)                                                                      |
+|      |                                    | e. Menggunakan validasi skema dan verifikasi input                                                                                                                                         | [Bab 5.6.3 – Validasi dan Sanitasi Input API](#5.6.3-keamanan-integrasi-dan-api)                                                                                      |
+|      |                                    | f. Menggunakan metode pelindungan layanan berbasis web                                                                                                                                     | [Bab 5.6.3 – Keamanan Data dalam Sistem Penghubung Layanan](#5.6.3-keamanan-integrasi-dan-api)                                                                        |
+|      |                                    | g. Menerapkan kontrol anti-otomatisasi                                                                                                                                                     | [Bab 5.5.2 – Kontrol Akses dan Autentikasi (Rate Limiting)](#5.5.2-pengamanan-perangkat-endpoint)                                                                     |
+| 13   | Keamanan Konfigurasi               | a. Mengonfigurasi server sesuai rekomendasi                                                                                                                                                | [Bab 5.9.1 – Manajemen Konfigurasi & Patch (Secure Baseline)](#5.9.1-manajemen-konfigurasi-&-patch)                                                                   |
+|      |                                    | b. Mendokumentasi, menyalin konfigurasi, dan dependensi                                                                                                                                    | [Bab 5.9.1 – Manajemen Konfigurasi & Patch](#5.9.1-manajemen-konfigurasi-&-patch); [Bab 4.4.4 – Informasi Terdokumentasi](#4.4.4-informasi-terdokumentasi)            |
+|      |                                    | c. Menghapus fitur, dokumentasi, sampel, dan konfigurasi tidak perlu                                                                                                                       | [Bab 5.9.1 – Standarisasi Konfigurasi Sistem (Hardening)](#5.9.1-manajemen-konfigurasi-&-patch)                                                                       |
+|      |                                    | d. Memvalidasi integritas aset yang diakses eksternal                                                                                                                                      | [Bab 5.9.1 – Manajemen Konfigurasi & Patch (Audit Konfigurasi)](#5.9.1-manajemen-konfigurasi-&-patch)                                                                 |
+|      |                                    | e. Menggunakan respons aplikasi dan konten yang aman                                                                                                                                       | [Bab 5.6.1 – Error Handling dan Logging Web](#5.6.1-keamanan-aplikasi-web); [Bab 5.6.1 – HTTP Security Headers](#5.6.1-keamanan-aplikasi-web)                         |
 
 ### 
 
@@ -2215,51 +2195,51 @@ Berdasarkan Pasal 26 dan 27 Peraturan BSSN Nomor 4 Tahun 2021
 
 Berdasarkan Pasal 28 dan 29 Peraturan BSSN Nomor 4 Tahun 2021
 
-| No   | Fungsi Keamanan                          | Standar Teknis                                                                                                                                            | Referensi Pedoman SMKI                                   |
-| :--- | :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------- |
-| 1    | Penyimpanan Data dan Persyaratan Privasi | a. Menyimpan seluruh data dan informasi yang dikecualikan hanya dalam fasilitas penyimpanan kredensial sistem                                             | Bab 5.6.2 – Keamanan Data pada Perangkat Mobile          |
-|      |                                          | b. Membatasi pertukaran data dan informasi yang dikecualikan dengan third party                                                                           | Bab 5.6.2 – Privacy Controls                             |
-|      |                                          | c. Menonaktifkan cache keyboard pada saat memasukkan data dan informasi yang dikecualikan                                                                 | Bab 5.6.2 – Privacy Controls                             |
-|      |                                          | d. Melindungi informasi yang dikecualikan saat terjadi inter process communication                                                                        | Bab 5.6.2 – Keamanan Data pada Perangkat Mobile          |
-|      |                                          | e. Melindungi data dan informasi yang dikecualikan yang dimasukkan melalui antarmuka pengguna                                                             | Bab 5.6.2 – Privacy Controls                             |
-| 2    | Kriptografi                              | a. Menghindari penggunaan kriptografi simetrik dengan hardcoded key                                                                                       | Bab 5.8.1 – Key Management                               |
-|      |                                          | b. Mengimplementasikan metode kriptografi yang sudah teruji sesuai kebutuhan                                                                              | Bab 5.8.1 – Standar Kriptografi                          |
-|      |                                          | c. Menghindari penggunaan protokol kriptografi atau algoritme kriptografi yang obsolet                                                                    | Bab 5.8.1 – Standar Kriptografi                          |
-|      |                                          | d. Menghindari penggunaan kunci kriptografi yang sama                                                                                                     | Bab 5.8.1 – Key Management                               |
-|      |                                          | e. Menggunakan pembangkit kunci acak yang memenuhi kriteria keacakan kunci                                                                                | Bab 5.8.1 – Key Management                               |
-| 3    | Autentikasi dan Manajemen Sesi           | a. Menerapkan autentikasi pada remote endpoint terhadap aplikasi yang menyediakan akses pengguna untuk layanan jarak jauh                                 | Bab 5.6.2 – Autentikasi dan Autorisasi Mobile            |
-|      |                                          | b. Menggunakan session identifier yang acak tanpa perlu mengirimkan kredensial pengguna apabila menggunakan stateful manajemen sesi                       | Bab 5.6.2 – Token Management                             |
-|      |                                          | c. Memastikan server menyediakan token yang telah ditandatangani menggunakan algoritme yang aman apabila menggunakan autentikasi stateless berbasis token | Bab 5.6.2 – Token Management                             |
-|      |                                          | d. Memastikan remote endpoint memutus sesi yang ada saat pengguna log out                                                                                 | Bab 5.6.2 – Data Wiping dan Sanitasi                     |
-|      |                                          | e. Menerapkan pengaturan sandi pada remote endpoint                                                                                                       | Bab 5.7.2 – Manajemen Kata Sandi & Autentikasi           |
-|      |                                          | f. Membatasi jumlah percobaan log in pada remote endpoint                                                                                                 | Bab 5.7.2 – Tabel Kebijakan Password                     |
-|      |                                          | g. Menentukan masa berlaku sesi dan masa kadaluarsa token pada remote endpoint                                                                            | Bab 5.6.2 – Token Management                             |
-|      |                                          | h. Melakukan otorisasi pada remote endpoint                                                                                                               | Bab 5.6.2 – Autentikasi dan Autorisasi Mobile            |
-| 4    | Komunikasi Jaringan                      | a. Menerapkan SSL/TLS yang tidak obsolet secara konsisten                                                                                                 | Bab 5.6.2 – Transport Security                           |
-|      |                                          | b. Memverifikasi sertifikat remote endpoint                                                                                                               | Bab 5.6.2 – Certificate Pinning                          |
-| 5    | Interaksi Platform                       | a. Memastikan aplikasi hanya meminta akses terhadap sumber daya yang diperlukan                                                                           | Bab 5.6.2 – Privacy Controls                             |
-|      |                                          | b. Melakukan validasi terhadap seluruh input dari sumber eksternal dan pengguna                                                                           | Bab 5.6.2 – Dependency Management Mobile                 |
-|      |                                          | c. Menghindari pengiriman fungsionalitas sensitif melalui skema custom URL dan fasilitas inter process communication                                      | Bab 5.6.2 – Privacy Controls                             |
-|      |                                          | d. Menghindari penggunaan JavaScript dalam WebView                                                                                                        | Bab 5.6.2 – Security Mobile Development Lifecycle        |
-|      |                                          | e. Menggunakan HTTPS pada WebView                                                                                                                         | Bab 5.6.2 – Transport Security                           |
-|      |                                          | f. Mengimplementasikan penggunaan serialisasi API yang aman                                                                                               | Bab 5.6.2 – Dependency Management Mobile                 |
-| 6    | Kualitas Kode dan Pengaturan Build       | a. Menandatangani aplikasi dengan sertifikat yang valid                                                                                                   | Bab 5.6.2 – App Distribution                             |
-|      |                                          | b. Memastikan aplikasi dalam mode rilis                                                                                                                   | Bab 5.6.2 – Testing dan Security Assessment Mobile Apps  |
-|      |                                          | c. Menghapus simbol debugging dari native binary                                                                                                          | Bab 5.6.2 – Testing dan Security Assessment Mobile Apps  |
-|      |                                          | d. Menghapus kode debugging dan kode bantuan pengembang                                                                                                   | Bab 5.6.2 – Testing dan Security Assessment Mobile Apps  |
-|      |                                          | e. Mengidentifikasi kelemahan seluruh komponen third party                                                                                                | Bab 5.6.2 – Dependency Management Mobile                 |
-|      |                                          | f. Menentukan mekanisme penanganan eror                                                                                                                   | Bab 5.6.2 – Crash Reporting                              |
-|      |                                          | g. Mengelola memori secara aman                                                                                                                           | Bab 5.6.2 – Secure Mobile Development Lifecycle          |
-|      |                                          | h. Mengaktifkan fitur keamanan yang tersedia                                                                                                              | Bab 5.6.2 – Secure Mobile Development Lifecycle          |
-| 7    | Ketahanan                                | a. Mencegah aplikasi berjalan pada perangkat yang telah dilakukan modifikasi yang tidak sah                                                               | Bab 5.6.2 – Jailbreak/Root Detection                     |
-|      |                                          | b. Mendeteksi dan merespons debugger                                                                                                                      | Bab 5.6.2 – Tamper Detection                             |
-|      |                                          | c. Mencegah executable file melakukan perubahan pada sumber daya perangkat                                                                                | Bab 5.6.2 – Tamper Detection                             |
-|      |                                          | d. Mendeteksi dan merespons keberadaan perangkat reverse engineering                                                                                      | Bab 5.6.2 – Reverse Engineering dan Tampering Protection |
-|      |                                          | e. Mencegah aplikasi berjalan dalam emulator                                                                                                              | Bab 5.6.2 – Jailbreak/Root Detection                     |
-|      |                                          | f. Mendeteksi perubahan kode dan data di ruang memori                                                                                                     | Bab 5.6.2 – Tamper Detection                             |
-|      |                                          | g. Menerapkan fungsi device binding dengan menggunakan property unik pada perangkat                                                                       | Bab 5.6.2 – Mobile Device Management (MDM) Integration   |
-|      |                                          | h. Melindungi seluruh file dan library pada aplikasi                                                                                                      | Bab 5.6.2 – Obfuscation dan Code Protection              |
-|      |                                          | i. Menerapkan metode obfuscation                                                                                                                          | Bab 5.6.2 – Obfuscation dan Code Protection              |
+| No   | Fungsi Keamanan                          | Standar Teknis                                                                                                                                            | Referensi Pedoman SMKI                                                                      |
+| :--- | :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
+| 1    | Penyimpanan Data dan Persyaratan Privasi | a. Menyimpan seluruh data dan informasi yang dikecualikan hanya dalam fasilitas penyimpanan kredensial sistem                                             | [Bab 5.6.2 – Keamanan Data pada Perangkat Mobile](#5.6.2-keamanan-aplikasi-mobile)          |
+|      |                                          | b. Membatasi pertukaran data dan informasi yang dikecualikan dengan third party                                                                           | [Bab 5.6.2 – Privacy Controls](#5.6.2-keamanan-aplikasi-mobile)                             |
+|      |                                          | c. Menonaktifkan cache keyboard pada saat memasukkan data dan informasi yang dikecualikan                                                                 | [Bab 5.6.2 – Privacy Controls](#5.6.2-keamanan-aplikasi-mobile)                             |
+|      |                                          | d. Melindungi informasi yang dikecualikan saat terjadi inter process communication                                                                        | [Bab 5.6.2 – Keamanan Data pada Perangkat Mobile](#5.6.2-keamanan-aplikasi-mobile)          |
+|      |                                          | e. Melindungi data dan informasi yang dikecualikan yang dimasukkan melalui antarmuka pengguna                                                             | [Bab 5.6.2 – Privacy Controls](#5.6.2-keamanan-aplikasi-mobile)                             |
+| 2    | Kriptografi                              | a. Menghindari penggunaan kriptografi simetrik dengan hardcoded key                                                                                       | [Bab 5.8.1 – Key Management](#5.8.1-enkripsi)                                               |
+|      |                                          | b. Mengimplementasikan metode kriptografi yang sudah teruji sesuai kebutuhan                                                                              | [Bab 5.8.1 – Standar Kriptografi](#5.8.1-enkripsi)                                          |
+|      |                                          | c. Menghindari penggunaan protokol kriptografi atau algoritme kriptografi yang obsolet                                                                    | [Bab 5.8.1 – Standar Kriptografi](#5.8.1-enkripsi)                                          |
+|      |                                          | d. Menghindari penggunaan kunci kriptografi yang sama                                                                                                     | [Bab 5.8.1 – Key Management](#5.8.1-enkripsi)                                               |
+|      |                                          | e. Menggunakan pembangkit kunci acak yang memenuhi kriteria keacakan kunci                                                                                | [Bab 5.8.1 – Key Management](#5.8.1-enkripsi)                                               |
+| 3    | Autentikasi dan Manajemen Sesi           | a. Menerapkan autentikasi pada remote endpoint terhadap aplikasi yang menyediakan akses pengguna untuk layanan jarak jauh                                 | [Bab 5.6.2 – Autentikasi dan Autorisasi Mobile](#5.6.2-keamanan-aplikasi-mobile)            |
+|      |                                          | b. Menggunakan session identifier yang acak tanpa perlu mengirimkan kredensial pengguna apabila menggunakan stateful manajemen sesi                       | [Bab 5.6.2 – Token Management](#5.6.2-keamanan-aplikasi-mobile)                             |
+|      |                                          | c. Memastikan server menyediakan token yang telah ditandatangani menggunakan algoritme yang aman apabila menggunakan autentikasi stateless berbasis token | [Bab 5.6.2 – Token Management](#5.6.2-keamanan-aplikasi-mobile)                             |
+|      |                                          | d. Memastikan remote endpoint memutus sesi yang ada saat pengguna log out                                                                                 | [Bab 5.6.2 – Data Wiping dan Sanitasi](#5.6.2-keamanan-aplikasi-mobile)                     |
+|      |                                          | e. Menerapkan pengaturan sandi pada remote endpoint                                                                                                       | [Bab 5.7.2 – Manajemen Kata Sandi & Autentikasi](#5.7.2-manajemen-kata-sandi-&-autentikasi) |
+|      |                                          | f. Membatasi jumlah percobaan log in pada remote endpoint                                                                                                 | [Bab 5.7.2 – Tabel Kebijakan Password](#5.7.2-manajemen-kata-sandi-&-autentikasi)           |
+|      |                                          | g. Menentukan masa berlaku sesi dan masa kadaluarsa token pada remote endpoint                                                                            | [Bab 5.6.2 – Token Management](#5.6.2-keamanan-aplikasi-mobile)                             |
+|      |                                          | h. Melakukan otorisasi pada remote endpoint                                                                                                               | [Bab 5.6.2 – Autentikasi dan Autorisasi Mobile](#5.6.2-keamanan-aplikasi-mobile)            |
+| 4    | Komunikasi Jaringan                      | a. Menerapkan SSL/TLS yang tidak obsolet secara konsisten                                                                                                 | [Bab 5.6.2 – Transport Security](#5.6.2-keamanan-aplikasi-mobile)                           |
+|      |                                          | b. Memverifikasi sertifikat remote endpoint                                                                                                               | [Bab 5.6.2 – Certificate Pinning](#5.6.2-keamanan-aplikasi-mobile)                          |
+| 5    | Interaksi Platform                       | a. Memastikan aplikasi hanya meminta akses terhadap sumber daya yang diperlukan                                                                           | [Bab 5.6.2 – Privacy Controls](#5.6.2-keamanan-aplikasi-mobile)                             |
+|      |                                          | b. Melakukan validasi terhadap seluruh input dari sumber eksternal dan pengguna                                                                           | [Bab 5.6.2 – Dependency Management Mobile](#5.6.2-keamanan-aplikasi-mobile)                 |
+|      |                                          | c. Menghindari pengiriman fungsionalitas sensitif melalui skema custom URL dan fasilitas inter process communication                                      | [Bab 5.6.2 – Privacy Controls](#5.6.2-keamanan-aplikasi-mobile)                             |
+|      |                                          | d. Menghindari penggunaan JavaScript dalam WebView                                                                                                        | [Bab 5.6.2 – Security Mobile Development Lifecycle](#5.6.2-keamanan-aplikasi-mobile)        |
+|      |                                          | e. Menggunakan HTTPS pada WebView                                                                                                                         | [Bab 5.6.2 – Transport Security](#5.6.2-keamanan-aplikasi-mobile)                           |
+|      |                                          | f. Mengimplementasikan penggunaan serialisasi API yang aman                                                                                               | [Bab 5.6.2 – Dependency Management Mobile](#5.6.2-keamanan-aplikasi-mobile)                 |
+| 6    | Kualitas Kode dan Pengaturan Build       | a. Menandatangani aplikasi dengan sertifikat yang valid                                                                                                   | [Bab 5.6.2 – App Distribution](#5.6.2-keamanan-aplikasi-mobile)                             |
+|      |                                          | b. Memastikan aplikasi dalam mode rilis                                                                                                                   | [Bab 5.6.2 – Testing dan Security Assessment Mobile Apps](#5.6.2-keamanan-aplikasi-mobile)  |
+|      |                                          | c. Menghapus simbol debugging dari native binary                                                                                                          | [Bab 5.6.2 – Testing dan Security Assessment Mobile Apps](#5.6.2-keamanan-aplikasi-mobile)  |
+|      |                                          | d. Menghapus kode debugging dan kode bantuan pengembang                                                                                                   | [Bab 5.6.2 – Testing dan Security Assessment Mobile Apps](#5.6.2-keamanan-aplikasi-mobile)  |
+|      |                                          | e. Mengidentifikasi kelemahan seluruh komponen third party                                                                                                | [Bab 5.6.2 – Dependency Management Mobile](#5.6.2-keamanan-aplikasi-mobile)                 |
+|      |                                          | f. Menentukan mekanisme penanganan eror                                                                                                                   | [Bab 5.6.2 – Crash Reporting](#5.6.2-keamanan-aplikasi-mobile)                              |
+|      |                                          | g. Mengelola memori secara aman                                                                                                                           | [Bab 5.6.2 – Secure Mobile Development Lifecycle](#5.6.2-keamanan-aplikasi-mobile)          |
+|      |                                          | h. Mengaktifkan fitur keamanan yang tersedia                                                                                                              | [Bab 5.6.2 – Secure Mobile Development Lifecycle](#5.6.2-keamanan-aplikasi-mobile)          |
+| 7    | Ketahanan                                | a. Mencegah aplikasi berjalan pada perangkat yang telah dilakukan modifikasi yang tidak sah                                                               | [Bab 5.6.2 – Jailbreak/Root Detection](#5.6.2-keamanan-aplikasi-mobile)                     |
+|      |                                          | b. Mendeteksi dan merespons debugger                                                                                                                      | [Bab 5.6.2 – Tamper Detection](#5.6.2-keamanan-aplikasi-mobile)                             |
+|      |                                          | c. Mencegah executable file melakukan perubahan pada sumber daya perangkat                                                                                | [Bab 5.6.2 – Tamper Detection](#5.6.2-keamanan-aplikasi-mobile)                             |
+|      |                                          | d. Mendeteksi dan merespons keberadaan perangkat reverse engineering                                                                                      | [Bab 5.6.2 – Reverse Engineering dan Tampering Protection](#5.6.2-keamanan-aplikasi-mobile) |
+|      |                                          | e. Mencegah aplikasi berjalan dalam emulator                                                                                                              | [Bab 5.6.2 – Jailbreak/Root Detection](#5.6.2-keamanan-aplikasi-mobile)                     |
+|      |                                          | f. Mendeteksi perubahan kode dan data di ruang memori                                                                                                     | [Bab 5.6.2 – Tamper Detection](#5.6.2-keamanan-aplikasi-mobile)                             |
+|      |                                          | g. Menerapkan fungsi device binding dengan menggunakan property unik pada perangkat                                                                       | [Bab 5.6.2 – Mobile Device Management (MDM) Integration](#5.6.2-keamanan-aplikasi-mobile)   |
+|      |                                          | h. Melindungi seluruh file dan library pada aplikasi                                                                                                      | [Bab 5.6.2 – Obfuscation dan Code Protection](#5.6.2-keamanan-aplikasi-mobile)              |
+|      |                                          | i. Menerapkan metode obfuscation                                                                                                                          | [Bab 5.6.2 – Obfuscation dan Code Protection](#5.6.2-keamanan-aplikasi-mobile)              |
 
 ### 
 
@@ -2267,44 +2247,44 @@ Berdasarkan Pasal 28 dan 29 Peraturan BSSN Nomor 4 Tahun 2021
 
 Berdasarkan Pasal 30 dan 31 Peraturan BSSN Nomor 4 Tahun 2021
 
-| No   | Fungsi Keamanan                               | Persyaratan BSSN No. 4 Tahun 2021                                                                                                                                      | Referensi Pedoman SMKI                                                               |
-| :--- | :-------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- |
-| 1    | Keamanan Interoperabilitas Data dan Informasi | a. Menerapkan sistem tanda tangan elektronik tersertifikasi untuk pengamanan dokumen dan surat elektronik                                                              | Bab 5.8.5 – Tanda Tangan Elektronik                                                  |
-|      |                                               | b. Menerapkan sistem enkripsi data                                                                                                                                     | Bab 5.8.1 – Enkripsi Data                                                            |
-|      |                                               | c. Memastikan data dan informasi selalu dapat diakses sesuai otoritasnya                                                                                               | Bab 5.5.2 – Kontrol Akses dan Autentikasi Sistem Penghubung Layanan                  |
-|      |                                               | d. Menerapkan sistem hash function pada file                                                                                                                           | Bab 5.8.1 – Enkripsi Data                                                            |
-| 2    | Kontrol Sistem Integrasi                      | a. Menerapkan SSL/TLS versi terkini pada sesi pengiriman data dan informasi                                                                                            | Bab 5.5.2 – Keamanan Data dalam Sistem Penghubung Layanan (Enkripsi Data in Transit) |
-|      |                                               | b. Menerapkan IPsec untuk mengamankan transmisi data dalam jaringan berbasis TCP/IP                                                                                    | Bab 5.5.2 – Keamanan Data dalam Sistem Penghubung Layanan                            |
-|      |                                               | c. Menerapkan sistem anti distributed denial of service                                                                                                                | Bab 5.5.2 – DDoS Mitigation                                                          |
-|      |                                               | d. Menerapkan autentikasi untuk memverifikasi identitas eksternal antar Layanan SPBE yang terhubung                                                                    | Bab 5.5.2 – Kontrol Akses dan Autentikasi Sistem Penghubung Layanan                  |
-|      |                                               | e. Menerapkan manajemen keamanan sesi                                                                                                                                  | Bab 5.5.2 – Manajemen Kredensial dan Secrets                                         |
-|      |                                               | f. Menerapkan pembatasan akses pengguna berdasarkan otorisasi yang telah ditetapkan                                                                                    | Bab 5.5.2 – Otorisasi Berbasis Scope dan Claim                                       |
-|      |                                               | g. Menerapkan validasi input                                                                                                                                           | Bab 5.5.2 – Validasi dan Sanitasi Input API                                          |
-|      |                                               | h. Menerapkan kriptografi pada verifikasi statis                                                                                                                       | Bab 5.8.1 – Enkripsi Data                                                            |
-|      |                                               | i. Menerapkan sertifikat elektronik pada web authentication                                                                                                            | Bab 5.5.2 – Keamanan Data dalam Sistem Penghubung Layanan (mTLS)                     |
-|      |                                               | j. Menerapkan penanganan eror dan pencatatan log                                                                                                                       | Bab 5.5.2 – Monitoring, Logging, dan Audit Trail                                     |
-|      |                                               | k. Menerapkan proteksi data dan jalur komunikasi                                                                                                                       | Bab 5.5.2 – Keamanan Data dalam Sistem Penghubung Layanan                            |
-|      |                                               | l. Menerapkan pendeteksi virus untuk memeriksa beberapa konten file                                                                                                    | Bab 5.5.2 – Validasi dan Sanitasi Input API                                          |
-|      |                                               | m. Menetapkan perjanjian tingkat layanan dengan standar paling rendah 95%                                                                                              | Bab 5.5.2 – Manajemen Perubahan API dan Versioning                                   |
-|      |                                               | n. Memastikan sistem integrasi tidak memiliki kerentanan yang berpotensi menjadi celah peretas                                                                         | Bab 5.9.4 – Vulnerability Management                                                 |
-| 3    | Kontrol Perangkat Integrator                  | a. Menggunakan sistem operasi dan perangkat lunak dengan security patches terkini                                                                                      | Bab 5.9.1 – Manajemen Konfigurasi & Patch                                            |
-|      |                                               | b. Menggunakan anti virus dan anti-spyware terkini                                                                                                                     | Bab 5.9.4 – Vulnerability Management                                                 |
-|      |                                               | c. Mengaktifkan fitur keamanan pada peramban web                                                                                                                       | Bab 5.5.2 – Kontrol Akses dan Autentikasi Sistem Penghubung Layanan                  |
-|      |                                               | d. Menerapkan firewall dan host-based intrusion detection systems                                                                                                      | Bab 5.5.1 – Firewall Berlapis; Bab 5.5.1 – Intrusion Detection System (IDS)          |
-|      |                                               | e. Mencegah instalasi perangkat lunak yang belum terverifikasi                                                                                                         | Bab 5.9.3 – Change Management                                                        |
-|      |                                               | f. Mencegah akses terhadap situs yang tidak sah                                                                                                                        | Bab 5.5.1 – Web dan Content Filtering                                                |
-|      |                                               | g. Mengaktifkan sistem recovery dan restore pada perangkat integrator                                                                                                  | Bab 5.11.2 – Backup & Recovery Data                                                  |
-| 4    | Keamanan API dan Web Service                  | a. Menerapkan SSL/TLS diantara pengirim dan penerima API                                                                                                               | Bab 5.5.2 – Keamanan Data dalam Sistem Penghubung Layanan (Enkripsi Data in Transit) |
-|      |                                               | b. Menerapkan protokol OAuth versi terkini untuk menjembatani interaksi antara resource owner, resource server dan/atau third party                                    | Bab 5.5.2 – Autentikasi Aplikasi-ke-Aplikasi                                         |
-|      |                                               | c. Menampilkan metode RESTful HTTP apabila input pengguna dinyatakan valid                                                                                             | Bab 5.5.2 – Arsitektur dan Desain Sistem Penghubung Layanan                          |
-|      |                                               | d. Melindungi layanan web RESTful yang menggunakan cookie dari cross-site request forgery                                                                              | Bab 5.6.1 – Proteksi Terhadap OWASP Top 10                                           |
-|      |                                               | e. Memvalidasi parameter yang masuk oleh penerima API untuk memastikan data yang diterima valid dan tidak menyebabkan kerusakan                                        | Bab 5.5.2 – Validasi dan Sanitasi Input API                                          |
-| 5    | Keamanan Migrasi Data                         | a. Memastikan migrasi data dilakukan secara bertahap dan terprogram oleh sistem                                                                                        | Bab 5.9.3 – Change Management                                                        |
-|      |                                               | b. Memastikan aplikasi yang menggunakan sistem basis data lama tetap dipertahankan sampai sistem pendukung basis data baru dapat berjalan atau berfungsi dengan normal | Bab 5.11.3 – Pemulihan Bencana & Latihan Simulasi                                    |
-|      |                                               | c. Mendokumentasikan format sistem basis data lama secara rinci                                                                                                        | Bab 4.4.4 – Informasi Terdokumentasi                                                 |
-|      |                                               | d. Melakukan pencadangan seluruh data yang tersimpan pada sistem sebelum melakukan migrasi data                                                                        | Bab 5.11.2 – Backup & Recovery Data                                                  |
-|      |                                               | e. Menerapkan teknik kriptografi pada proses penyimpanan dan pengambilan data                                                                                          | Bab 5.8.1 – Enkripsi Data                                                            |
-|      |                                               | f. Melakukan validasi data ketika proses migrasi data selesai                                                                                                          | Bab 5.9.3 – Change Management                                                        |
+| No   | Fungsi Keamanan                               | Persyaratan BSSN No. 4 Tahun 2021                                                                                                                                      | Referensi Pedoman SMKI                                                                                                                                        |
+| :--- | :-------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1    | Keamanan Interoperabilitas Data dan Informasi | a. Menerapkan sistem tanda tangan elektronik tersertifikasi untuk pengamanan dokumen dan surat elektronik                                                              | [Bab 5.8.6 – Tanda Tangan Elektronik](#5.8.6-tanda-tangan-elektronik)                                                                                         |
+|      |                                               | b. Menerapkan sistem enkripsi data                                                                                                                                     | [Bab 5.8.1 – Enkripsi Data](#5.8.1-enkripsi)                                                                                                                  |
+|      |                                               | c. Memastikan data dan informasi selalu dapat diakses sesuai otoritasnya                                                                                               | [Bab 5.6.3 – Kontrol Akses dan Autentikasi Sistem Penghubung Layanan](#5.6.3-keamanan-integrasi-dan-api)                                                      |
+|      |                                               | d. Menerapkan sistem hash function pada file                                                                                                                           | [Bab 5.8.1 – Enkripsi Data](#5.8.1-enkripsi)                                                                                                                  |
+| 2    | Kontrol Sistem Integrasi                      | a. Menerapkan SSL/TLS versi terkini pada sesi pengiriman data dan informasi                                                                                            | [Bab 5.6.3 – Keamanan Data dalam Sistem Penghubung Layanan (Enkripsi Data in Transit)](#5.6.3-keamanan-integrasi-dan-api)                                     |
+|      |                                               | b. Menerapkan IPsec untuk mengamankan transmisi data dalam jaringan berbasis TCP/IP                                                                                    | [Bab 5.6.3 – Keamanan Data dalam Sistem Penghubung Layanan](#5.6.3-keamanan-integrasi-dan-api)                                                                |
+|      |                                               | c. Menerapkan sistem anti distributed denial of service                                                                                                                | [Bab 5.6.3 – DDoS Mitigation](#5.6.3-keamanan-integrasi-dan-api)                                                                                              |
+|      |                                               | d. Menerapkan autentikasi untuk memverifikasi identitas eksternal antar Layanan SPBE yang terhubung                                                                    | [Bab 5.6.3 – Kontrol Akses dan Autentikasi Sistem Penghubung Layanan](#5.6.3-keamanan-integrasi-dan-api)                                                      |
+|      |                                               | e. Menerapkan manajemen keamanan sesi                                                                                                                                  | [Bab 5.5.2 – Manajemen Kredensial dan Secrets](#5.5.2-pengamanan-perangkat-endpoint)                                                                          |
+|      |                                               | f. Menerapkan pembatasan akses pengguna berdasarkan otorisasi yang telah ditetapkan                                                                                    | [Bab 5.5.2 – Otorisasi Berbasis Scope dan Claim](#5.5.2-pengamanan-perangkat-endpoint)                                                                        |
+|      |                                               | g. Menerapkan validasi input                                                                                                                                           | [Bab 5.6.3 – Validasi dan Sanitasi Input API](#5.6.3-keamanan-integrasi-dan-api)                                                                              |
+|      |                                               | h. Menerapkan kriptografi pada verifikasi statis                                                                                                                       | [Bab 5.8.1 – Enkripsi Data](#5.8.1-enkripsi)                                                                                                                  |
+|      |                                               | i. Menerapkan sertifikat elektronik pada web authentication                                                                                                            | [Bab 5.6.3 – Keamanan Data dalam Sistem Penghubung Layanan (mTLS)](#5.6.3-keamanan-integrasi-dan-api)                                                         |
+|      |                                               | j. Menerapkan penanganan eror dan pencatatan log                                                                                                                       | [Bab 5.5.2 – Monitoring, Logging, dan Audit Trail](#5.5.2-pengamanan-perangkat-endpoint)                                                                      |
+|      |                                               | k. Menerapkan proteksi data dan jalur komunikasi                                                                                                                       | [Bab 5.6.3 – Keamanan Data dalam Sistem Penghubung Layanan](#5.6.3-keamanan-integrasi-dan-api)                                                                |
+|      |                                               | l. Menerapkan pendeteksi virus untuk memeriksa beberapa konten file                                                                                                    | [Bab 5.6.3 – Validasi dan Sanitasi Input API](#5.6.3-keamanan-integrasi-dan-api)                                                                              |
+|      |                                               | m. Menetapkan perjanjian tingkat layanan dengan standar paling rendah 95%                                                                                              | [Bab 5.6.3 – Manajemen Perubahan API dan Versioning](#5.6.3-keamanan-integrasi-dan-api)                                                                       |
+|      |                                               | n. Memastikan sistem integrasi tidak memiliki kerentanan yang berpotensi menjadi celah peretas                                                                         | [Bab 5.9.4 – Vulnerability Management](#5.9.4-vulnerability-management)                                                                                       |
+| 3    | Kontrol Perangkat Integrator                  | a. Menggunakan sistem operasi dan perangkat lunak dengan security patches terkini                                                                                      | [Bab 5.9.1 – Manajemen Konfigurasi & Patch](#5.9.1-manajemen-konfigurasi-&-patch)                                                                             |
+|      |                                               | b. Menggunakan anti virus dan anti-spyware terkini                                                                                                                     | [Bab 5.9.4 – Vulnerability Management](#5.9.4-vulnerability-management)                                                                                       |
+|      |                                               | c. Mengaktifkan fitur keamanan pada peramban web                                                                                                                       | [Bab 5.6.3 – Kontrol Akses dan Autentikasi Sistem Penghubung Layanan](#5.6.3-keamanan-integrasi-dan-api)                                                      |
+|      |                                               | d. Menerapkan firewall dan host-based intrusion detection systems                                                                                                      | [Bab 5.5.1 – Firewall Berlapis](#5.5.1-pengamanan-server-dan-platform); [Bab 5.5.1 – Intrusion Detection System (IDS)](#5.5.1-pengamanan-server-dan-platform) |
+|      |                                               | e. Mencegah instalasi perangkat lunak yang belum terverifikasi                                                                                                         | [Bab 5.9.3 – Change Management](#5.9.3-change-management)                                                                                                     |
+|      |                                               | f. Mencegah akses terhadap situs yang tidak sah                                                                                                                        | [Bab 5.5.1 – Web dan Content Filtering](#5.5.1-pengamanan-server-dan-platform)                                                                                |
+|      |                                               | g. Mengaktifkan sistem recovery dan restore pada perangkat integrator                                                                                                  | [Bab 5.11.2 – Backup & Recovery Data](#5.11.2-backup-&-recovery-data)                                                                                         |
+| 4    | Keamanan API dan Web Service                  | a. Menerapkan SSL/TLS diantara pengirim dan penerima API                                                                                                               | [Bab 5.6.3 – Keamanan Data dalam Sistem Penghubung Layanan (Enkripsi Data in Transit)](#5.6.3-keamanan-integrasi-dan-api)                                     |
+|      |                                               | b. Menerapkan protokol OAuth versi terkini untuk menjembatani interaksi antara resource owner, resource server dan/atau third party                                    | [Bab 5.5.2 – Autentikasi Aplikasi-ke-Aplikasi](#5.5.2-pengamanan-perangkat-endpoint)                                                                          |
+|      |                                               | c. Menampilkan metode RESTful HTTP apabila input pengguna dinyatakan valid                                                                                             | [Bab 5.6.3 – Arsitektur dan Desain Sistem Penghubung Layanan](#5.6.3-keamanan-integrasi-dan-api)                                                              |
+|      |                                               | d. Melindungi layanan web RESTful yang menggunakan cookie dari cross-site request forgery                                                                              | [Bab 5.6.1 – Proteksi Terhadap OWASP Top 10](#5.6.1-keamanan-aplikasi-web)                                                                                    |
+|      |                                               | e. Memvalidasi parameter yang masuk oleh penerima API untuk memastikan data yang diterima valid dan tidak menyebabkan kerusakan                                        | [Bab 5.6.3 – Validasi dan Sanitasi Input API](#5.6.3-keamanan-integrasi-dan-api)                                                                              |
+| 5    | Keamanan Migrasi Data                         | a. Memastikan migrasi data dilakukan secara bertahap dan terprogram oleh sistem                                                                                        | [Bab 5.9.3 – Change Management](#5.9.3-change-management)                                                                                                     |
+|      |                                               | b. Memastikan aplikasi yang menggunakan sistem basis data lama tetap dipertahankan sampai sistem pendukung basis data baru dapat berjalan atau berfungsi dengan normal | [Bab 5.11.3 – Pemulihan Bencana & Latihan Simulasi](#5.11.3-pemulihan-bencana-&-latihan-simulasi)                                                             |
+|      |                                               | c. Mendokumentasikan format sistem basis data lama secara rinci                                                                                                        | [Bab 4.4.4 – Informasi Terdokumentasi](#4.4.4-informasi-terdokumentasi)                                                                                       |
+|      |                                               | d. Melakukan pencadangan seluruh data yang tersimpan pada sistem sebelum melakukan migrasi data                                                                        | [Bab 5.11.2 – Backup & Recovery Data](#5.11.2-backup-&-recovery-data)                                                                                         |
+|      |                                               | e. Menerapkan teknik kriptografi pada proses penyimpanan dan pengambilan data                                                                                          | [Bab 5.8.1 – Enkripsi Data](#5.8.1-enkripsi)                                                                                                                  |
+|      |                                               | f. Melakukan validasi data ketika proses migrasi data selesai                                                                                                          | [Bab 5.9.3 – Change Management](#5.9.3-change-management)                                                                                                     |
 
 ### 
 
@@ -2312,53 +2292,53 @@ Berdasarkan Pasal 30 dan 31 Peraturan BSSN Nomor 4 Tahun 2021
 
 Berdasarkan Pasal 32 dan 33 Peraturan BSSN Nomor 4 Tahun 2021
 
-| No   | Aspek Keamanan                                             | Persyaratan BSSN No. 4 Tahun 2021                                                                                                              | Referensi Pedoman SMKI                                                  |
-| :--- | :--------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------- |
-| 1    | Aspek Administrasi Keamanan Jaringan Intra                 | a. Menyusun dan mengevaluasi dokumen arsitektur Jaringan Intra                                                                                 | Bab 5.5.1 – Arsitektur dan Segmentasi Jaringan                          |
-|      |                                                            | b. Mengidentifikasi seluruh aset infrastruktur jaringan                                                                                        | Bab 5.1.1 – Identifikasi & Inventaris Aset                              |
-|      |                                                            | c. Menyusun dan menetapkan standar operasional prosedur terkait pemeliharaan keamanan Jaringan Intra                                           | Bab 5.9.1 – Manajemen Konfigurasi & Patch Bab 5.9.3 – Change Management |
-|      |                                                            | d. Membuat laporan pengawasan keamanan jaringan secara periodik                                                                                | Bab 6.4.1 – Pemantauan Operasional                                      |
-| 2    | Kontrol Akses dan Autentikasi                              | a. Menempatkan perangkat infrastruktur jaringan yang menyediakan layanan Jaringan Intra pada zona terpisah                                     | Bab 5.5.1 – Segmentasi Jaringan Berlapis                                |
-|      |                                                            | b. Menggunakan autentikasi untuk mengakses Jaringan Intra                                                                                      | Bab 5.5.1 – Network Access Control (NAC)                                |
-|      |                                                            | c. Menerapkan pembatasan akses dalam Jaringan Intra                                                                                            | Bab 5.5.1 – Access Control List (ACL)                                   |
-|      |                                                            | d. Mematikan atau membatasi protocol, port, dan layanan yang tidak digunakan                                                                   | Bab 5.5.1 – Pengaturan Routing dan Akses Port                           |
-|      |                                                            | e. Menerapkan penyaringan tautan dan memblokir akses ke situs berbahaya                                                                        | Bab 5.5.1 – Web dan Content Filtering                                   |
-|      |                                                            | f. Menerapkan fungsi honeypot untuk menganalisis celah keamanan berdasarkan jenis serangan                                                     | Bab 5.5.1 – Monitoring dan Logging Jaringan Intra                       |
-|      |                                                            | g. Menerapkan virtual private network dan mengaktifkan fungsi enkripsi pada jalur komunikasi yang digunakan                                    | Bab 5.5.1 – Keamanan Jaringan Intra                                     |
-|      |                                                            | h. Memberikan kewenangan hanya kepada administrator untuk menginstal perangkat lunak dan/atau mengubah konfigurasi sistem dalam Jaringan Intra | Bab 5.7.1 – Kontrol Akses Pengguna & Hak Akses                          |
-|      |                                                            | i. Menerapkan secure endpoints                                                                                                                 | Bab 5.5.1 – Network Access Control (NAC)                                |
-|      |                                                            | j. Memblokir layanan yang tidak dikenal                                                                                                        | Bab 5.5.1 – Kontrol Akses Jaringan Intra                                |
-|      |                                                            | k. Menerapkan SSL/TLS versi terkini pada jalur akses Jaringan Intra                                                                            | Bab 5.8.1 – Enkripsi Data in Transit                                    |
-|      |                                                            | l. Menerapkan server perantara saat client mengakses server database dalam rangka pemeliharaan                                                 | Bab 5.5.1 – Arsitektur dan Segmentasi Jaringan                          |
-| 3    | Persyaratan Perangkat dan Aplikasi Keamanan Jaringan Intra | a. Menggunakan perangkat SIEM untuk network logging dan monitoring                                                                             | Bab 5.5.1 – Log Aggregation                                             |
-|      |                                                            | b. Menerapkan sistem deteksi dini kerentanan keamanan perangkat jaringan                                                                       | Bab 5.5.1 – Intrusion Detection System (IDS)                            |
-|      |                                                            | c. Menggunakan perangkat firewall                                                                                                              | Bab 5.5.1 – Firewall Berlapis                                           |
-|      |                                                            | d. Menggunakan perangkat IDS dan IPS                                                                                                           | Bab 5.5.1 – Intrusion Detection & Prevention System                     |
-|      |                                                            | e. Menerapkan VPN terenkripsi untuk penggunaan akses jarak jauh secara terbatas                                                                | Bab 5.7.3 – Pengelolaan Perangkat Mobile & Remote Access                |
-|      |                                                            | f. Menerapkan kontrol update patching pada infrastruktur Jaringan Intra dan sistem komputer                                                    | Bab 5.9.1 – Manajemen Konfigurasi & Patch                               |
-|      |                                                            | g. Menggunakan perangkat web application firewall                                                                                              | Bab 5.5.1 – Web Application Firewall (WAF)                              |
-|      |                                                            | h. Menggunakan perangkat load balancer untuk menjaga ketersediaan akses terhadap jaringan dan aplikasi                                         | Bab 5.5.1 – Redundansi dan High Availability Jaringan                   |
-|      |                                                            | i. Memperbarui teknologi keamanan perangkat keras dan perangkat lunak untuk meminimalisasi celah peretas                                       | Bab 5.9.1 – Manajemen Konfigurasi & Patch                               |
-|      |                                                            | j. Mengunduh perangkat lunak melalui enterprise software distribution system                                                                   | Bab 5.9.3 – Change Management                                           |
-|      |                                                            | k. Menerapkan sertifikat elektronik                                                                                                            | Bab 5.8.1 – Enkripsi Data in Transit                                    |
-| 4    | Kontrol Keamanan Gateway                                   | a. Menerapkan content filtering                                                                                                                | Bab 5.5.1 – Web dan Content Filtering                                   |
-|      |                                                            | b. Menerapkan inspection packet filtering untuk memeriksa packet yang masuk pada Jaringan Intra                                                | Bab 5.5.1 – Firewall Berlapis                                           |
-|      |                                                            | c. Menerapkan kontrol keamanan pada fitur akses jarak jauh perangkat gateway                                                                   | Bab 5.7.3 – Pengelolaan Perangkat Mobile & Remote Access                |
-|      |                                                            | d. Memastikan perangkat gateway yang menghubungkan antar Jaringan Intra tidak terkoneksi langsung dengan jaringan publik                       | Bab 5.5.1 – Arsitektur dan Segmentasi Jaringan                          |
-|      |                                                            | e. Melaksanakan manajemen traffic gateway                                                                                                      | Bab 5.5.1 – DDoS Mitigation                                             |
-|      |                                                            | f. Memastikan port tidak dibuka secara default                                                                                                 | Bab 5.5.1 – Pengaturan Routing dan Akses Port                           |
-| 5    | Kontrol Keamanan Access Point pada Jaringan Nirkabel       | a. Menerapkan protokol keamanan access point nirkabel dan teknologi enkripsi terkini                                                           | Bab 5.5.1 – Wireless Network Security                                   |
-|      |                                                            | b. Menerapkan MAC address filtering                                                                                                            | Bab 5.5.1 – Wireless Network Security                                   |
-|      |                                                            | c. Menerapkan dedicated service set identifier                                                                                                 | Bab 5.5.1 – Wireless Network Security                                   |
-|      |                                                            | d. Menerapkan pembatasan jangkauan radio transmisi dan pengguna jaringan                                                                       | Bab 5.5.1 – Wireless Network Security                                   |
-|      |                                                            | e. Menerapkan pembatasan terkait penambahan perangkat nirkabel yang dipasang secara tidak sah                                                  | Bab 5.5.1 – Network Access Control (NAC)                                |
-|      |                                                            | f. Menerapkan manajemen vulnerability secara berkala dan berkelanjutan                                                                         | Bab 5.9.4 – Vulnerability Management                                    |
-|      |                                                            | g. Melakukan patching firmware secara rutin                                                                                                    | Bab 5.9.1 – Manajemen Konfigurasi & Patch                               |
-| 6    | Kontrol Konfigurasi Access Point pada Jaringan Nirkabel    | a. Menggunakan kata sandi yang kuat                                                                                                            | Bab 5.7.2 – Manajemen Kata Sandi & Autentikasi                          |
-|      |                                                            | b. Menggunakan protokol AAA pada perangkat infrastruktur jaringan untuk management user atau otentikasi administrator access point             | Bab 5.5.1 – Wireless Network Security                                   |
-|      |                                                            | c. Memastikan fitur akses konfigurasi jarak jauh hanya dapat digunakan dalam kondisi darurat dengan menerapkan kontrol keamanan                | Bab 5.7.3 – Pengelolaan Perangkat Mobile & Remote Access                |
-|      |                                                            | d. Mengisolasi atau melakukan segmentasi jaringan area lokal nirkabel                                                                          | Bab 5.5.1 – Wireless Network Security                                   |
-|      |                                                            | e. Menonaktifkan antarmuka nirkabel, layanan, dan aplikasi yang tidak digunakan                                                                | Bab 5.5.1 – Pengaturan Routing dan Akses Port                           |
+| No   | Aspek Keamanan                                             | Persyaratan BSSN No. 4 Tahun 2021                                                                                                              | Referensi Pedoman SMKI                                                                                          |
+| :--- | :--------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
+| 1    | Aspek Administrasi Keamanan Jaringan Intra                 | a. Menyusun dan mengevaluasi dokumen arsitektur Jaringan Intra                                                                                 | [Bab 5.5.1 – Arsitektur dan Segmentasi Jaringan](#5.5.1-pengamanan-server-dan-platform)                         |
+|      |                                                            | b. Mengidentifikasi seluruh aset infrastruktur jaringan                                                                                        | [Bab 5.1.1 – Identifikasi & Inventaris Aset](#5.1.1-identifikasi-&-inventaris-aset)                             |
+|      |                                                            | c. Menyusun dan menetapkan standar operasional prosedur terkait pemeliharaan keamanan Jaringan Intra                                           | [Bab 5.9.1 – Manajemen Konfigurasi & Patch Bab 5.9.3 – Change Management](#5.9.1-manajemen-konfigurasi-&-patch) |
+|      |                                                            | d. Membuat laporan pengawasan keamanan jaringan secara periodik                                                                                | [Bab 6.4.1 – Pemantauan Operasional](#6.4.1-pemantauan-operasional-harian)                                      |
+| 2    | Kontrol Akses dan Autentikasi                              | a. Menempatkan perangkat infrastruktur jaringan yang menyediakan layanan Jaringan Intra pada zona terpisah                                     | [Bab 5.5.1 – Segmentasi Jaringan Berlapis](#5.5.1-pengamanan-server-dan-platform)                               |
+|      |                                                            | b. Menggunakan autentikasi untuk mengakses Jaringan Intra                                                                                      | [Bab 5.5.1 – Network Access Control (NAC)](#5.5.1-pengamanan-server-dan-platform)                               |
+|      |                                                            | c. Menerapkan pembatasan akses dalam Jaringan Intra                                                                                            | [Bab 5.5.1 – Access Control List (ACL)](#5.5.1-pengamanan-server-dan-platform)                                  |
+|      |                                                            | d. Mematikan atau membatasi protocol, port, dan layanan yang tidak digunakan                                                                   | [Bab 5.5.1 – Pengaturan Routing dan Akses Port](#5.5.1-pengamanan-server-dan-platform)                          |
+|      |                                                            | e. Menerapkan penyaringan tautan dan memblokir akses ke situs berbahaya                                                                        | [Bab 5.5.1 – Web dan Content Filtering](#5.5.1-pengamanan-server-dan-platform)                                  |
+|      |                                                            | f. Menerapkan fungsi honeypot untuk menganalisis celah keamanan berdasarkan jenis serangan                                                     | [Bab 5.5.1 – Monitoring dan Logging Jaringan Intra](#5.5.1-pengamanan-server-dan-platform)                      |
+|      |                                                            | g. Menerapkan virtual private network dan mengaktifkan fungsi enkripsi pada jalur komunikasi yang digunakan                                    | [Bab 5.5.1 – Keamanan Jaringan Intra](#5.5.1-pengamanan-server-dan-platform)                                    |
+|      |                                                            | h. Memberikan kewenangan hanya kepada administrator untuk menginstal perangkat lunak dan/atau mengubah konfigurasi sistem dalam Jaringan Intra | [Bab 5.7.1 – Kontrol Akses Pengguna & Hak Akses](#5.7.1-kontrol-akses-pengguna-&-hak-akses)                     |
+|      |                                                            | i. Menerapkan secure endpoints                                                                                                                 | [Bab 5.5.1 – Network Access Control (NAC)](#5.5.1-pengamanan-server-dan-platform)                               |
+|      |                                                            | j. Memblokir layanan yang tidak dikenal                                                                                                        | [Bab 5.5.1 – Kontrol Akses Jaringan Intra](#5.5.1-pengamanan-server-dan-platform)                               |
+|      |                                                            | k. Menerapkan SSL/TLS versi terkini pada jalur akses Jaringan Intra                                                                            | [Bab 5.8.1 – Enkripsi Data in Transit](#5.8.1-enkripsi)                                                         |
+|      |                                                            | l. Menerapkan server perantara saat client mengakses server database dalam rangka pemeliharaan                                                 | [Bab 5.5.1 – Arsitektur dan Segmentasi Jaringan](#5.5.1-pengamanan-server-dan-platform)                         |
+| 3    | Persyaratan Perangkat dan Aplikasi Keamanan Jaringan Intra | a. Menggunakan perangkat SIEM untuk network logging dan monitoring                                                                             | [Bab 5.5.1 – Log Aggregation](#5.5.1-pengamanan-server-dan-platform)                                            |
+|      |                                                            | b. Menerapkan sistem deteksi dini kerentanan keamanan perangkat jaringan                                                                       | [Bab 5.5.1 – Intrusion Detection System (IDS)](#5.5.1-pengamanan-server-dan-platform)                           |
+|      |                                                            | c. Menggunakan perangkat firewall                                                                                                              | [Bab 5.5.1 – Firewall Berlapis](#5.5.1-pengamanan-server-dan-platform)                                          |
+|      |                                                            | d. Menggunakan perangkat IDS dan IPS                                                                                                           | [Bab 5.5.1 – Intrusion Detection & Prevention System](#5.5.1-pengamanan-server-dan-platform)                    |
+|      |                                                            | e. Menerapkan VPN terenkripsi untuk penggunaan akses jarak jauh secara terbatas                                                                | [Bab 5.7.3 – Pengelolaan Perangkat Mobile & Remote Access](#5.7.3-pengelolaan-perangkat-mobile-&-remote-access) |
+|      |                                                            | f. Menerapkan kontrol update patching pada infrastruktur Jaringan Intra dan sistem komputer                                                    | [Bab 5.9.1 – Manajemen Konfigurasi & Patch](#5.9.1-manajemen-konfigurasi-&-patch)                               |
+|      |                                                            | g. Menggunakan perangkat web application firewall                                                                                              | [Bab 5.5.1 – Web Application Firewall (WAF)](#5.5.1-pengamanan-server-dan-platform)                             |
+|      |                                                            | h. Menggunakan perangkat load balancer untuk menjaga ketersediaan akses terhadap jaringan dan aplikasi                                         | [Bab 5.5.1 – Redundansi dan High Availability Jaringan](#5.5.1-pengamanan-server-dan-platform)                  |
+|      |                                                            | i. Memperbarui teknologi keamanan perangkat keras dan perangkat lunak untuk meminimalisasi celah peretas                                       | [Bab 5.9.1 – Manajemen Konfigurasi & Patch](#5.9.1-manajemen-konfigurasi-&-patch)                               |
+|      |                                                            | j. Mengunduh perangkat lunak melalui enterprise software distribution system                                                                   | [Bab 5.9.3 – Change Management](#5.9.3-change-management)                                                       |
+|      |                                                            | k. Menerapkan sertifikat elektronik                                                                                                            | [Bab 5.8.1 – Enkripsi Data in Transit](#5.8.1-enkripsi)                                                         |
+| 4    | Kontrol Keamanan Gateway                                   | a. Menerapkan content filtering                                                                                                                | [Bab 5.5.1 – Web dan Content Filtering](#5.5.1-pengamanan-server-dan-platform)                                  |
+|      |                                                            | b. Menerapkan inspection packet filtering untuk memeriksa packet yang masuk pada Jaringan Intra                                                | [Bab 5.5.1 – Firewall Berlapis](#5.5.1-pengamanan-server-dan-platform)                                          |
+|      |                                                            | c. Menerapkan kontrol keamanan pada fitur akses jarak jauh perangkat gateway                                                                   | [Bab 5.7.3 – Pengelolaan Perangkat Mobile & Remote Access](#5.7.3-pengelolaan-perangkat-mobile-&-remote-access) |
+|      |                                                            | d. Memastikan perangkat gateway yang menghubungkan antar Jaringan Intra tidak terkoneksi langsung dengan jaringan publik                       | [Bab 5.5.1 – Arsitektur dan Segmentasi Jaringan](#5.5.1-pengamanan-server-dan-platform)                         |
+|      |                                                            | e. Melaksanakan manajemen traffic gateway                                                                                                      | [Bab 5.5.1 – DDoS Mitigation](#5.5.1-pengamanan-server-dan-platform)                                            |
+|      |                                                            | f. Memastikan port tidak dibuka secara default                                                                                                 | [Bab 5.5.1 – Pengaturan Routing dan Akses Port](#5.5.1-pengamanan-server-dan-platform)                          |
+| 5    | Kontrol Keamanan Access Point pada Jaringan Nirkabel       | a. Menerapkan protokol keamanan access point nirkabel dan teknologi enkripsi terkini                                                           | [Bab 5.5.1 – Wireless Network Security](#5.5.1-pengamanan-server-dan-platform)                                  |
+|      |                                                            | b. Menerapkan MAC address filtering                                                                                                            | [Bab 5.5.1 – Wireless Network Security](#5.5.1-pengamanan-server-dan-platform)                                  |
+|      |                                                            | c. Menerapkan dedicated service set identifier                                                                                                 | [Bab 5.5.1 – Wireless Network Security](#5.5.1-pengamanan-server-dan-platform)                                  |
+|      |                                                            | d. Menerapkan pembatasan jangkauan radio transmisi dan pengguna jaringan                                                                       | [Bab 5.5.1 – Wireless Network Security](#5.5.1-pengamanan-server-dan-platform)                                  |
+|      |                                                            | e. Menerapkan pembatasan terkait penambahan perangkat nirkabel yang dipasang secara tidak sah                                                  | [Bab 5.5.1 – Network Access Control (NAC)](#5.5.1-pengamanan-server-dan-platform)                               |
+|      |                                                            | f. Menerapkan manajemen vulnerability secara berkala dan berkelanjutan                                                                         | [Bab 5.9.4 – Vulnerability Management](#5.9.4-vulnerability-management)                                         |
+|      |                                                            | g. Melakukan patching firmware secara rutin                                                                                                    | [Bab 5.9.1 – Manajemen Konfigurasi & Patch](#5.9.1-manajemen-konfigurasi-&-patch)                               |
+| 6    | Kontrol Konfigurasi Access Point pada Jaringan Nirkabel    | a. Menggunakan kata sandi yang kuat                                                                                                            | [Bab 5.7.2 – Manajemen Kata Sandi & Autentikasi](#5.7.2-manajemen-kata-sandi-&-autentikasi)                     |
+|      |                                                            | b. Menggunakan protokol AAA pada perangkat infrastruktur jaringan untuk management user atau otentikasi administrator access point             | [Bab 5.5.1 – Wireless Network Security](#5.5.1-pengamanan-server-dan-platform)                                  |
+|      |                                                            | c. Memastikan fitur akses konfigurasi jarak jauh hanya dapat digunakan dalam kondisi darurat dengan menerapkan kontrol keamanan                | [Bab 5.7.3 – Pengelolaan Perangkat Mobile & Remote Access](#5.7.3-pengelolaan-perangkat-mobile-&-remote-access) |
+|      |                                                            | d. Mengisolasi atau melakukan segmentasi jaringan area lokal nirkabel                                                                          | [Bab 5.5.1 – Wireless Network Security](#5.5.1-pengamanan-server-dan-platform)                                  |
+|      |                                                            | e. Menonaktifkan antarmuka nirkabel, layanan, dan aplikasi yang tidak digunakan                                                                | [Bab 5.5.1 – Pengaturan Routing dan Akses Port](#5.5.1-pengamanan-server-dan-platform)                          |
 
 ## 
 
@@ -2366,102 +2346,102 @@ Berdasarkan Pasal 32 dan 33 Peraturan BSSN Nomor 4 Tahun 2021
 
 Berikut adalah korespondensi antara kontrol Annex A ISO/IEC 27001:2022 dengan bab dan sub-bab dalam Pedoman SMKI SPBE Kota Mojokerto.
 
-| No      | Annex A Control (ISO/IEC 27001:2022)                                   | Referensi Bab dalam Pedoman SMKI                                           |
-| :------ | :--------------------------------------------------------------------- | :------------------------------------------------------------------------- |
-| **A.5** | **A.5 – Organizational Controls**                                      |                                                                            |
-| 5.1     | Policies for information security                                      | Bab 2.1 – Kebijakan Keamanan Informasi                                     |
-| 5.2     | Information security roles and responsibilities                        | Bab 3.3 – Tugas & Tanggung Jawab Peran Kunci                               |
-| 5.3     | Segregation of duties                                                  | Bab 4.2.3 – Peningkatan Keamanan SPBE                                      |
-| 5.4     | Management responsibilities                                            | Bab 3.2 – Komitmen Manajemen Puncak                                        |
-| 5.5     | Contact with authorities                                               | Bab 4.2.3 – Peningkatan Keamanan SPBE                                      |
-| 5.6     | Contact with special interest groups                                   | Bab 4.4.3 – Komunikasi Internal & Eksternal                                |
-| 5.7     | Threat intelligence                                                    | Bab 2.5 – Analisis Isu Eksternal                                           |
-| 5.8     | Information security in project management                             | Bab 4.3 – Integrasi Perencanaan SMKI dengan Proses Bisnis                  |
-| 5.9     | Inventory of information and other associated assets                   | Bab 5.1.1 – Identifikasi & Inventaris Aset                                 |
-| 5.10    | Acceptable use of information and other associated assets              | Bab 5.1.2 – Kepemilikan Aset                                               |
-| 5.11    | Return of assets                                                       | Bab 5.1.6 – Penghapusan & Pemusnahan Aset                                  |
-| 5.12    | Classification of information                                          | Bab 5.1.3 – Klasifikasi Tingkat Kerahasiaan Aset Informasi                 |
-| 5.13    | Labelling of information                                               | Bab 5.1.4 – Pelabelan Aset                                                 |
-| 5.14    | Information transfer                                                   | Bab 5.8 – Proteksi Data & Privasi                                          |
-| 5.15    | Access control                                                         | Bab 5.7 – Pengelolaan Akses                                                |
-| 5.16    | Identity management                                                    | Bab 5.7 – Pengelolaan Akses                                                |
-| 5.17    | Authentication information                                             | Bab 5.7.2 – Manajemen Kata Sandi & Autentikasi                             |
-| 5.18    | Access rights                                                          | Bab 5.7.1 – Kontrol Akses Pengguna & Hak Akses                             |
-| 5.19    | Information security in supplier relationships                         | Bab 5.12 – Pengelolaan Pihak Ketiga                                        |
-| 5.20    | Addressing information security within supplier agreements             | Bab 5.12 – Pengelolaan Pihak Ketiga                                        |
-| 5.21    | Managing information security in the ICT supply chain                  | Bab 5.12 – Pengelolaan Pihak Ketiga                                        |
-| 5.22    | Monitoring, review and change management of supplier services          | Bab 5.12.3 – Pengawasan dan Evaluasi                                       |
-| 5.23    | Information security for use of cloud services                         | Bab 5.12 – Pengelolaan Pihak Ketiga                                        |
-| 5.24    | Information security incident management planning and preparation      | Bab 5.10 – Penanganan Insiden Keamanan Informasi                           |
-| 5.25    | Assessment and decision on information security events                 | Bab 5.10.1 – Identifikasi & Pelaporan Insiden                              |
-| 5.26    | Response to information security incidents                             | Bab 5.10.2 – Penanganan & Investigasi Insiden                              |
-| 5.27    | Learning from information security incidents                           | Bab 5.10.3 – Pemulihan & Pembelajaran dari Insiden                         |
-| 5.28    | Collection of evidence                                                 | Bab 5.10.4 – Dokumentasi, Pelaporan & Perbaikan Berkelanjutan              |
-| 5.29    | Information security during disruption                                 | Bab 5.11 – Kontinuitas Keamanan Informasi                                  |
-| 5.30    | ICT readiness for business continuity                                  | Bab 5.11.1 – Rencana Kontinuitas TI                                        |
-| 5.31    | Legal, statutory, regulatory and contractual requirements              | Bab 2.3 – Kepatuhan Regulasi & Persyaratan Legal                           |
-| 5.32    | Intellectual property rights                                           | Bab 2.3 – Kepatuhan Regulasi & Persyaratan Legal                           |
-| 5.33    | Protection of records                                                  | Bab 2.2 – Pengendalian Dokumen & Rekaman                                   |
-| 5.34    | Privacy and protection of PII                                          | Bab 5.8 – Proteksi Data & Privasi                                          |
-| 5.35    | Independent review of information security                             | Bab 6.2.1 – Audit Internal SMKI SPBE                                       |
-| 5.36    | Compliance with policies, rules and standards for information security | Bab 6.2 – Audit dan Review Berkala SMKI SPBE                               |
-| 5.37    | Documented operating procedures                                        | Bab 4.4.4 – Informasi Terdokumentasi                                       |
-| **2**   | **A.6 – People Controls**                                              |                                                                            |
-| 6.1     | Screening                                                              | Bab 5.3.1 – Seleksi & Screening                                            |
-| 6.2     | Terms and conditions of employment                                     | Bab 5.3.1 – Seleksi & Screening                                            |
-| 6.3     | Information security awareness, education and training                 | Bab 5.3.2 – Pelatihan & Awareness                                          |
-| 6.4     | Disciplinary process                                                   | Bab 5.3.3 – Pemutusan Hubungan Kerja & Pengembalian Aset                   |
-| 6.5     | Responsibilities after termination or change of employment             | Bab 5.3.3 – Pemutusan Hubungan Kerja & Pengembalian Aset                   |
-| 6.6     | Confidentiality or non-disclosure agreements                           | Bab 5.3.1 – Seleksi & Screening                                            |
-| 6.7     | Remote working                                                         | Bab 5.7.3 – Pengelolaan Perangkat Mobile & Remote Access                   |
-| 6.8     | Information security event reporting                                   | Bab 5.10.1 – Identifikasi & Pelaporan Insiden                              |
-| **3**   | **A.7 – Physical Controls**                                            |                                                                            |
-| 7.1     | Physical security perimeters                                           | Bab 5.4.2 – Area Terbatas & Proteksi Perimeter                             |
-| 7.2     | Physical entry                                                         | Bab 5.4.1 – Pengendalian Akses Fisik                                       |
-| 7.3     | Securing offices, rooms and facilities                                 | Bab 5.4.2 – Area Terbatas & Proteksi Perimeter                             |
-| 7.4     | Physical security monitoring                                           | Bab 5.4.1 – Pengendalian Akses Fisik                                       |
-| 7.5     | Protecting against physical and environmental threats                  | Bab 5.4.5 – Lingkungan & Infrastruktur Pendukung                           |
-| 7.6     | Working in secure areas                                                | Bab 5.4.3 – Pengendalian Area Kerja & Peralatan                            |
-| 7.7     | Clear desk and clear screen                                            | Bab 5.4.3 – Pengendalian Area Kerja & Peralatan                            |
-| 7.8     | Equipment siting and protection                                        | Bab 5.4.4 – Keamanan Peralatan & Media Penyimpanan                         |
-| 7.9     | Security of assets off-premises                                        | Bab 5.4.4 – Keamanan Peralatan & Media Penyimpanan                         |
-| 7.10    | Storage media                                                          | Bab 5.4.4 – Keamanan Peralatan & Media Penyimpanan                         |
-| 7.11    | Supporting utilities                                                   | Bab 5.4.5 – Lingkungan & Infrastruktur Pendukung                           |
-| 7.12    | Cabling security                                                       | Bab 5.4.5 – Lingkungan & Infrastruktur Pendukung                           |
-| 7.13    | Equipment maintenance                                                  | Bab 5.4.5 – Lingkungan & Infrastruktur Pendukung                           |
-| 7.14    | Secure disposal or re-use of equipment                                 | Bab 5.1.6 – Penghapusan & Pemusnahan Aset                                  |
-| **4**   | **A.8 – Technological Controls**                                       |                                                                            |
-| 8.1     | User endpoint devices                                                  | Bab 5.7.3 – Pengelolaan Perangkat Mobile & Remote Access                   |
-| 8.2     | Privileged access rights                                               | Bab 5.7.1 – Kontrol Akses Pengguna & Hak Akses                             |
-| 8.3     | Information access restriction                                         | Bab 5.7 – Pengelolaan Akses                                                |
-| 8.4     | Access to source code                                                  | Bab 5.6.1 – Secure Software Development Lifecycle                          |
-| 8.5     | Secure authentication                                                  | Bab 5.7.2 – Manajemen Kata Sandi & Autentikasi                             |
-| 8.6     | Capacity management                                                    | Bab 5.9.5 – Manajemen Kapasitas                                            |
-| 8.7     | Protection against malware                                             | Bab 5.9.4 – Vulnerability Management                                       |
-| 8.8     | Management of technical vulnerabilities                                | Bab 5.9.4 – Vulnerability Management                                       |
-| 8.9     | Configuration management                                               | Bab 5.9.1 – Manajemen Konfigurasi & Patch                                  |
-| 8.10    | Information deletion                                                   | Bab 5.1.6 – Penghapusan & Pemusnahan Aset                                  |
-| 8.11    | Data masking                                                           | Bab 5.8.2 – Data Masking & Anonymization                                   |
-| 8.12    | Data leakage prevention                                                | Bab 5.8 – Proteksi Data & Privasi                                          |
-| 8.13    | Information backup                                                     | Bab 5.11.2 – Backup & Recovery Data                                        |
-| 8.14    | Redundancy of information processing facilities                        | Bab 5.11 – Kontinuitas Keamanan Informasi                                  |
-| 8.15    | Logging                                                                | Bab 5.9.2 – Logging & Monitoring Sistem                                    |
-| 8.16    | Monitoring activities                                                  | Bab 5.9.2 – Logging & Monitoring Sistem                                    |
-| 8.17    | Clock synchronization                                                  | Bab 5.9.2 – Logging & Monitoring Sistem                                    |
-| 8.18    | Use of privileged utility programs                                     | Bab 5.7.1 – Kontrol Akses Pengguna & Hak Akses                             |
-| 8.19    | Installation of software on operational systems                        | Bab 5.9.1 – Manajemen Konfigurasi & Patch                                  |
-| 8.20    | Networks security                                                      | Bab 5.5 – Keamanan Jaringan dan Infrastruktur                              |
-| 8.21    | Security of network services                                           | Bab 5.5 – Keamanan Jaringan dan Infrastruktur                              |
-| 8.22    | Segregation of networks                                                | Bab 5.5.1 – Segmentasi Jaringan Berlapis                                   |
-| 8.23    | Web filtering                                                          | Bab 5.5.1 – Web Application Firewall (WAF)                                 |
-| 8.24    | Use of cryptography                                                    | Bab 5.8.1 – Enkripsi Data                                                  |
-| 8.25    | Secure development life cycle                                          | Bab 5.6.1 – Secure Software Development Lifecycle                          |
-| 8.26    | Application security requirements                                      | Bab 5.6.1 – Keamanan Aplikasi Web                                          |
-| 8.27    | Secure system architecture and engineering principles                  | Bab 5.5 – Keamanan Jaringan dan Infrastruktur; Bab 5.6 – Keamanan Aplikasi |
-| 8.28    | Secure coding                                                          | Bab 5.6.1 – Secure Software Development Lifecycle                          |
-| 8.29    | Security testing in development and acceptance                         | Bab 5.6.1 – Secure Software Development Lifecycle                          |
-| 8.30    | Outsourced development                                                 | Bab 5.12 – Pengelolaan Pihak Ketiga                                        |
-| 8.31    | Separation of development, test and production environments            | Bab 5.5.1 – Segmentasi Jaringan Berlapis                                   |
-| 8.32    | Change management                                                      | Bab 5.9.3 – Change Management                                              |
-| 8.33    | Test information                                                       | Bab 5.8.2 – Data Masking & Anonymization                                   |
-| 8.34    | Protection of information systems during audit testing                 | Bab 6.2 – Audit dan Review Berkala SMKI SPBE                               |
+| No      | Annex A Control (ISO/IEC 27001:2022)                                   | Referensi Bab dalam Pedoman SMKI                                                                                                                                                   |
+| :------ | :--------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **A.5** | **A.5 – Organizational Controls**                                      |                                                                                                                                                                                    |
+| 5.1     | Policies for information security                                      | [Bab 2.1 – Kebijakan Keamanan Informasi](#2.1-kebijakan-keamanan-informasi)                                                                                                        |
+| 5.2     | Information security roles and responsibilities                        | [Bab 3.3 – Tugas & Tanggung Jawab Peran Kunci](#3.3-tugas-&-tanggung-jawab-peran-kunci)                                                                                            |
+| 5.3     | Segregation of duties                                                  | [Bab 4.2.3 – Peningkatan Keamanan SPBE](#4.2.3-peningkatan-keamanan-spbe)                                                                                                          |
+| 5.4     | Management responsibilities                                            | [Bab 3.2 – Komitmen Manajemen Puncak](#3.2-komitmen-manajemen-puncak)                                                                                                              |
+| 5.5     | Contact with authorities                                               | [Bab 4.2.3 – Peningkatan Keamanan SPBE](#4.2.3-peningkatan-keamanan-spbe)                                                                                                          |
+| 5.6     | Contact with special interest groups                                   | [Bab 4.4.3 – Komunikasi Internal & Eksternal](#4.4.3-komunikasi-internal-&-eksternal-(klausul-7.4))                                                                                |
+| 5.7     | Threat intelligence                                                    | [Bab 2.5 – Analisis Isu Eksternal](#2.5-analisis-isu-eksternal)                                                                                                                    |
+| 5.8     | Information security in project management                             | [Bab 4.3 – Integrasi Perencanaan SMKI dengan Proses Bisnis](#4.3-integrasi-perencanaan-smki-dengan-proses-bisnis)                                                                  |
+| 5.9     | Inventory of information and other associated assets                   | [Bab 5.1.1 – Identifikasi & Inventaris Aset](#5.1.1-identifikasi-&-inventaris-aset)                                                                                                |
+| 5.10    | Acceptable use of information and other associated assets              | [Bab 5.1.2 – Kepemilikan Aset](#5.1.2-kepemilikan-aset)                                                                                                                            |
+| 5.11    | Return of assets                                                       | [Bab 5.1.6 – Penghapusan & Pemusnahan Aset](#5.1.6-penghapusan-dan-pemusnahan-aset)                                                                                                |
+| 5.12    | Classification of information                                          | [Bab 5.1.3 – Klasifikasi Tingkat Kerahasiaan Aset Informasi](#5.1.3-klasifikasi-tingkat-kerahasiaan-aset-informasi)                                                                |
+| 5.13    | Labelling of information                                               | [Bab 5.1.4 – Pelabelan Aset](#5.1.4-pelabelan-aset)                                                                                                                                |
+| 5.14    | Information transfer                                                   | [Bab 5.8 – Proteksi Data & Privasi](#5.8-proteksi-data)                                                                                                                            |
+| 5.15    | Access control                                                         | [Bab 5.7 – Pengelolaan Akses](#5.7-pengelolaan-akses-(annex-a-5.14,-8.11–8.14))                                                                                                    |
+| 5.16    | Identity management                                                    | [Bab 5.7 – Pengelolaan Akses](#5.7-pengelolaan-akses-(annex-a-5.14,-8.11–8.14))                                                                                                    |
+| 5.17    | Authentication information                                             | [Bab 5.7.2 – Manajemen Kata Sandi & Autentikasi](#5.7.2-manajemen-kata-sandi-&-autentikasi)                                                                                        |
+| 5.18    | Access rights                                                          | [Bab 5.7.1 – Kontrol Akses Pengguna & Hak Akses](#5.7.1-kontrol-akses-pengguna-&-hak-akses)                                                                                        |
+| 5.19    | Information security in supplier relationships                         | [Bab 5.12 – Pengelolaan Pihak Ketiga](#5.12-pengelolaan-pihak-ketiga)                                                                                                              |
+| 5.20    | Addressing information security within supplier agreements             | [Bab 5.12 – Pengelolaan Pihak Ketiga](#5.12-pengelolaan-pihak-ketiga)                                                                                                              |
+| 5.21    | Managing information security in the ICT supply chain                  | [Bab 5.12 – Pengelolaan Pihak Ketiga](#5.12-pengelolaan-pihak-ketiga)                                                                                                              |
+| 5.22    | Monitoring, review and change management of supplier services          | [Bab 5.12.3 – Pengawasan dan Evaluasi](#5.12.3-pengawasan-dan-evaluasi)                                                                                                            |
+| 5.23    | Information security for use of cloud services                         | [Bab 5.12 – Pengelolaan Pihak Ketiga](#5.12-pengelolaan-pihak-ketiga)                                                                                                              |
+| 5.24    | Information security incident management planning and preparation      | [Bab 5.10 – Penanganan Insiden Keamanan Informasi](#5.10-penanganan-insiden-keamanan-informasi)                                                                                    |
+| 5.25    | Assessment and decision on information security events                 | [Bab 5.10.1 – Identifikasi & Pelaporan Insiden](#5.10.1-identifikasi-&-pelaporan-insiden)                                                                                          |
+| 5.26    | Response to information security incidents                             | [Bab 5.10.2 – Penanganan & Investigasi Insiden](#5.10.2-penanganan-&-investigasi-insiden)                                                                                          |
+| 5.27    | Learning from information security incidents                           | [Bab 5.10.3 – Pemulihan & Pembelajaran dari Insiden](#5.10.3-pemulihan-&-pembelajaran-dari-insiden)                                                                                |
+| 5.28    | Collection of evidence                                                 | [Bab 5.10.4 – Dokumentasi, Pelaporan & Perbaikan Berkelanjutan](#5.10.4-dokumentasi,-pelaporan-&-perbaikan-berkelanjutan)                                                          |
+| 5.29    | Information security during disruption                                 | [Bab 5.11 – Kontinuitas Keamanan Informasi](#5.11-kontinuitas-keamanan-informasi)                                                                                                  |
+| 5.30    | ICT readiness for business continuity                                  | [Bab 5.11.1 – Rencana Kontinuitas TI](#5.11.1-rencana-kontinuitas-tik)                                                                                                             |
+| 5.31    | Legal, statutory, regulatory and contractual requirements              | [Bab 2.3 – Kepatuhan Regulasi & Persyaratan Legal](#2.3-kepatuhan-regulasi-&-persyaratan-legal)                                                                                    |
+| 5.32    | Intellectual property rights                                           | [Bab 2.3 – Kepatuhan Regulasi & Persyaratan Legal](#2.3-kepatuhan-regulasi-&-persyaratan-legal)                                                                                    |
+| 5.33    | Protection of records                                                  | [Bab 2.2 – Pengendalian Dokumen & Rekaman](#2.2-pengendalian-dokumen-&-rekaman)                                                                                                    |
+| 5.34    | Privacy and protection of PII                                          | [Bab 5.8 – Proteksi Data & Privasi](#5.8-proteksi-data)                                                                                                                            |
+| 5.35    | Independent review of information security                             | [Bab 6.2.1 – Audit Internal SMKI SPBE](#6.2.1-audit-internal-smki-spbe)                                                                                                            |
+| 5.36    | Compliance with policies, rules and standards for information security | [Bab 6.2 – Audit dan Review Berkala SMKI SPBE](#6.2-audit-dan-review-berkala-smki-spbe)                                                                                            |
+| 5.37    | Documented operating procedures                                        | [Bab 4.4.4 – Informasi Terdokumentasi](#4.4.4-informasi-terdokumentasi)                                                                                                            |
+| **2**   | **A.6 – People Controls**                                              |                                                                                                                                                                                    |
+| 6.1     | Screening                                                              | [Bab 5.3.1 – Seleksi & Screening](#5.3.1-seleksi-&-screening)                                                                                                                      |
+| 6.2     | Terms and conditions of employment                                     | [Bab 5.3.1 – Seleksi & Screening](#5.3.1-seleksi-&-screening)                                                                                                                      |
+| 6.3     | Information security awareness, education and training                 | [Bab 5.3.2 – Pelatihan & Awareness](#5.3.2-pelatihan-dan-kesadaran-keamanan-informasi)                                                                                             |
+| 6.4     | Disciplinary process                                                   | [Bab 5.3.3 – Pemutusan Hubungan Kerja & Pengembalian Aset](#5.3.3-pemutusan-hubungan-kerja-&-pengembalian-aset)                                                                    |
+| 6.5     | Responsibilities after termination or change of employment             | [Bab 5.3.3 – Pemutusan Hubungan Kerja & Pengembalian Aset](#5.3.3-pemutusan-hubungan-kerja-&-pengembalian-aset)                                                                    |
+| 6.6     | Confidentiality or non-disclosure agreements                           | [Bab 5.3.1 – Seleksi & Screening](#5.3.1-seleksi-&-screening)                                                                                                                      |
+| 6.7     | Remote working                                                         | [Bab 5.7.3 – Pengelolaan Perangkat Mobile & Remote Access](#5.7.3-pengelolaan-perangkat-mobile-&-remote-access)                                                                    |
+| 6.8     | Information security event reporting                                   | [Bab 5.10.1 – Identifikasi & Pelaporan Insiden](#5.10.1-identifikasi-&-pelaporan-insiden)                                                                                          |
+| **3**   | **A.7 – Physical Controls**                                            |                                                                                                                                                                                    |
+| 7.1     | Physical security perimeters                                           | [Bab 5.4.2 – Area Terbatas & Proteksi Perimeter](#5.4.2-area-terbatas-&-proteksi-perimeter)                                                                                        |
+| 7.2     | Physical entry                                                         | [Bab 5.4.1 – Pengendalian Akses Fisik](#5.4.1-pengendalian-akses-fisik)                                                                                                            |
+| 7.3     | Securing offices, rooms and facilities                                 | [Bab 5.4.2 – Area Terbatas & Proteksi Perimeter](#5.4.2-area-terbatas-&-proteksi-perimeter)                                                                                        |
+| 7.4     | Physical security monitoring                                           | [Bab 5.4.1 – Pengendalian Akses Fisik](#5.4.1-pengendalian-akses-fisik)                                                                                                            |
+| 7.5     | Protecting against physical and environmental threats                  | [Bab 5.4.5 – Lingkungan & Infrastruktur Pendukung](#5.4.5-lingkungan-&-infrastruktur-pendukung)                                                                                    |
+| 7.6     | Working in secure areas                                                | [Bab 5.4.3 – Pengendalian Area Kerja & Peralatan](#5.4.3-pengendalian-area-kerja-&-peralatan)                                                                                      |
+| 7.7     | Clear desk and clear screen                                            | [Bab 5.4.3 – Pengendalian Area Kerja & Peralatan](#5.4.3-pengendalian-area-kerja-&-peralatan)                                                                                      |
+| 7.8     | Equipment siting and protection                                        | [Bab 5.4.4 – Keamanan Peralatan & Media Penyimpanan](#5.4.4-keamanan-peralatan-&-media-penyimpanan)                                                                                |
+| 7.9     | Security of assets off-premises                                        | [Bab 5.4.4 – Keamanan Peralatan & Media Penyimpanan](#5.4.4-keamanan-peralatan-&-media-penyimpanan)                                                                                |
+| 7.10    | Storage media                                                          | [Bab 5.4.4 – Keamanan Peralatan & Media Penyimpanan](#5.4.4-keamanan-peralatan-&-media-penyimpanan)                                                                                |
+| 7.11    | Supporting utilities                                                   | [Bab 5.4.5 – Lingkungan & Infrastruktur Pendukung](#5.4.5-lingkungan-&-infrastruktur-pendukung)                                                                                    |
+| 7.12    | Cabling security                                                       | [Bab 5.4.5 – Lingkungan & Infrastruktur Pendukung](#5.4.5-lingkungan-&-infrastruktur-pendukung)                                                                                    |
+| 7.13    | Equipment maintenance                                                  | [Bab 5.4.5 – Lingkungan & Infrastruktur Pendukung](#5.4.5-lingkungan-&-infrastruktur-pendukung)                                                                                    |
+| 7.14    | Secure disposal or re-use of equipment                                 | [Bab 5.1.6 – Penghapusan & Pemusnahan Aset](#5.1.6-penghapusan-dan-pemusnahan-aset)                                                                                                |
+| **4**   | **A.8 – Technological Controls**                                       |                                                                                                                                                                                    |
+| 8.1     | User endpoint devices                                                  | [Bab 5.7.3 – Pengelolaan Perangkat Mobile & Remote Access](#5.7.3-pengelolaan-perangkat-mobile-&-remote-access)                                                                    |
+| 8.2     | Privileged access rights                                               | [Bab 5.7.1 – Kontrol Akses Pengguna & Hak Akses](#5.7.1-kontrol-akses-pengguna-&-hak-akses)                                                                                        |
+| 8.3     | Information access restriction                                         | [Bab 5.7 – Pengelolaan Akses](#5.7-pengelolaan-akses-(annex-a-5.14,-8.11–8.14))                                                                                                    |
+| 8.4     | Access to source code                                                  | [Bab 5.6.1 – Secure Software Development Lifecycle](#5.6.1-keamanan-aplikasi-web)                                                                                                  |
+| 8.5     | Secure authentication                                                  | [Bab 5.7.2 – Manajemen Kata Sandi & Autentikasi](#5.7.2-manajemen-kata-sandi-&-autentikasi)                                                                                        |
+| 8.6     | Capacity management                                                    | [Bab 5.9.5 – Manajemen Kapasitas](#5.9.5-manajemen-kapasitas)                                                                                                                      |
+| 8.7     | Protection against malware                                             | [Bab 5.9.4 – Vulnerability Management](#5.9.4-vulnerability-management)                                                                                                            |
+| 8.8     | Management of technical vulnerabilities                                | [Bab 5.9.4 – Vulnerability Management](#5.9.4-vulnerability-management)                                                                                                            |
+| 8.9     | Configuration management                                               | [Bab 5.9.1 – Manajemen Konfigurasi & Patch](#5.9.1-manajemen-konfigurasi-&-patch)                                                                                                  |
+| 8.10    | Information deletion                                                   | [Bab 5.1.6 – Penghapusan & Pemusnahan Aset](#5.1.6-penghapusan-dan-pemusnahan-aset)                                                                                                |
+| 8.11    | Data masking                                                           | [Bab 5.8.2 – Data Masking & Anonymization](#5.8.2-hash)                                                                                                                            |
+| 8.12    | Data leakage prevention                                                | [Bab 5.8 – Proteksi Data & Privasi](#5.8-proteksi-data)                                                                                                                            |
+| 8.13    | Information backup                                                     | [Bab 5.11.2 – Backup & Recovery Data](#5.11.2-backup-&-recovery-data)                                                                                                              |
+| 8.14    | Redundancy of information processing facilities                        | [Bab 5.11 – Kontinuitas Keamanan Informasi](#5.11-kontinuitas-keamanan-informasi)                                                                                                  |
+| 8.15    | Logging                                                                | [Bab 5.9.2 – Logging & Monitoring Sistem](#5.9.2-error-handling,-logging-dan-monitoring-sistem)                                                                                    |
+| 8.16    | Monitoring activities                                                  | [Bab 5.9.2 – Logging & Monitoring Sistem](#5.9.2-error-handling,-logging-dan-monitoring-sistem)                                                                                    |
+| 8.17    | Clock synchronization                                                  | [Bab 5.9.2 – Logging & Monitoring Sistem](#5.9.2-error-handling,-logging-dan-monitoring-sistem)                                                                                    |
+| 8.18    | Use of privileged utility programs                                     | [Bab 5.7.1 – Kontrol Akses Pengguna & Hak Akses](#5.7.1-kontrol-akses-pengguna-&-hak-akses)                                                                                        |
+| 8.19    | Installation of software on operational systems                        | [Bab 5.9.1 – Manajemen Konfigurasi & Patch](#5.9.1-manajemen-konfigurasi-&-patch)                                                                                                  |
+| 8.20    | Networks security                                                      | [Bab 5.5 – Keamanan Jaringan dan Infrastruktur](#5.5-keamanan-infrastruktur-jaringan-dan-perangkat-endpoint)                                                                       |
+| 8.21    | Security of network services                                           | [Bab 5.5 – Keamanan Jaringan dan Infrastruktur](#5.5-keamanan-infrastruktur-jaringan-dan-perangkat-endpoint)                                                                       |
+| 8.22    | Segregation of networks                                                | [Bab 5.5.1 – Segmentasi Jaringan Berlapis](#5.5.1-pengamanan-server-dan-platform)                                                                                                  |
+| 8.23    | Web filtering                                                          | [Bab 5.5.1 – Web Application Firewall (WAF)](#5.5.1-pengamanan-server-dan-platform)                                                                                                |
+| 8.24    | Use of cryptography                                                    | [Bab 5.8.1 – Enkripsi Data](#5.8.1-enkripsi)                                                                                                                                       |
+| 8.25    | Secure development life cycle                                          | [Bab 5.6.1 – Secure Software Development Lifecycle](#5.6.1-keamanan-aplikasi-web)                                                                                                  |
+| 8.26    | Application security requirements                                      | [Bab 5.6.1 – Keamanan Aplikasi Web](#5.6.1-keamanan-aplikasi-web)                                                                                                                  |
+| 8.27    | Secure system architecture and engineering principles                  | [Bab 5.5 – Keamanan Jaringan dan Infrastruktur](#5.5-keamanan-infrastruktur-jaringan-dan-perangkat-endpoint); [Bab 5.6 – Keamanan Aplikasi](#5.6-keamanan-aplikasi-web-dan-mobile) |
+| 8.28    | Secure coding                                                          | [Bab 5.6.1 – Secure Software Development Lifecycle](#5.6.1-keamanan-aplikasi-web)                                                                                                  |
+| 8.29    | Security testing in development and acceptance                         | [Bab 5.6.1 – Secure Software Development Lifecycle](#5.6.1-keamanan-aplikasi-web)                                                                                                  |
+| 8.30    | Outsourced development                                                 | [Bab 5.12 – Pengelolaan Pihak Ketiga](#5.12-pengelolaan-pihak-ketiga)                                                                                                              |
+| 8.31    | Separation of development, test and production environments            | [Bab 5.5.1 – Segmentasi Jaringan Berlapis](#5.5.1-pengamanan-server-dan-platform)                                                                                                  |
+| 8.32    | Change management                                                      | [Bab 5.9.3 – Change Management](#5.9.3-change-management)                                                                                                                          |
+| 8.33    | Test information                                                       | [Bab 5.8.2 – Data Masking & Anonymization](#5.8.2-hash)                                                                                                                            |
+| 8.34    | Protection of information systems during audit testing                 | [Bab 6.2 – Audit dan Review Berkala SMKI SPBE](#6.2-audit-dan-review-berkala-smki-spbe)                                                                                            |

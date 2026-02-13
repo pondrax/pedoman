@@ -1061,8 +1061,10 @@ Penerapan SSDLC mengintegrasikan kontrol keamanan di setiap tahap development se
    - **Secure Coding Practices**: Mengikuti standar OWASP Top 10 dan menggunakan framework keamanan serta library yang telah diaudit.
    - **Autentikasi dan Manajemen Sesi**:
      - Penerapan multi-factor authentication (MFA) untuk akun administratif dan akun sensitif sesuai kebijakan pada **Bab 5.7.2 (Manajemen Kata Sandi & Autentikasi)**.  
-     - Session management aman dengan mekanisme timeout otomatis, regenerasi session ID setelah login, secure cookie attributes (Secure, HttpOnly, SameSite) sesuai spesifikasi **Bab 5.7.2**.  
-     - Mekanisme deteksi dan persetujuan sesi duplikasi dari perangkat/lokasi berbeda untuk kategori sistem Tinggi dan Strategis.  
+     - Terdapat proses untuk siklus hidup autentikasi (registrasi, login, logout, reset password, dll). Verifikasi autentikasi dilakukan pada sisi server.   
+     - Session management aman dengan mekanisme timeout otomatis, regenerasi session ID setelah login, dengan menerapkan perlindungan atribut secure cookie (Secure, HttpOnly, SameSite) sesuai spesifikasi **Bab 5.7.2**.  
+     - Token sesi yang dihasilkan wajib memenuhi kriteria acak sesuai algoritma kriptografi indonesia, divalidasi disisi server.
+     - Terdapat mekanisme deteksi dan persetujuan sesi duplikasi dari perangkat/lokasi berbeda untuk kategori sistem Tinggi dan Strategis.  
      - Mekanisme pemulihan kata sandi yang aman (OTP, verifikasi email/telepon, logging permintaan reset).
    - **Kontrol Akses dan Otorisasi**:
      - Implementasi Role-Based Access Control (RBAC) dan Attribute-Based Access Control (ABAC) sesuai **Bab 5.7.1 (Kontrol Akses Pengguna & Hak Akses)**.  
@@ -1077,30 +1079,44 @@ Penerapan SSDLC mengintegrasikan kontrol keamanan di setiap tahap development se
      - Implementasi HTTP Security Headers yang ketat, terutama Content Security Policy (CSP). Implementasi tersebut wajib merujuk pada `securityheaders.com` dengan target minimum rating **A**.
    - **Enkripsi dan Manajemen Kriptografi**:
      - Manajemen kunci kriptografi sesuai dengan prosedur pada **Bab 5.8.1 (Enkripsi Data)**.
+     - Terdapat perlindungan integritas data dan file melalui mekanisme hash.
+     - Menambahkan header integrity hash pada url file yang diunduh untuk dapat dilakukan proses validasi integritas aset.
    - **Keamanan Komunikasi**:
      - Mendukung penegakan HTTPS global melalui mekanisme aplikasi seperti redirect 301 dari HTTP ke HTTPS.
      - Penerapan HTTP Strict Transport Security (HSTS) untuk memaksa browser menggunakan jalur aman.
-     - Pengaturan atribut keamanan pada cookie (Secure, HttpOnly, SameSite) sesuai **Bab 5.7.2**.
      - Certificate validation yang ketat dan implementasi certificate pinning untuk aplikasi mobile/API clients strategis.
    - **Keamanan Upload File**:
      - Validasi file type (magic number), scanning antivirus/malware, sanitasi metadata, dan penyimpanan di luar web root.
+     - Aplikasi wajib menerapkan batasan tipe dan ukuran file yang diunggah (Contoh: file pdf maksimal 10MB, file jpg maksimal 2MB, file doc maksimal 5MB).
+     - File yang tidak sesuai dengan kriteria wajib ditolak tidak dapat diunggah kedalam aplikasi.
+     - File yang diunduh tidak boleh mengandung script atau executable code, konfigurasi server wajib memberikan tipe file yang sesuai dengan file yang diunduh (Contoh: file pdf diunduh dengan tipe application/pdf).
+    - **Izin dan Privasi**:
+      - Terdapat mekanisme untuk mengelola izin dan privasi pengguna. Jenis izin yang dapat dikelola dapat berupa: akses data, lokasi, kamera, mikrofon, notifikasi, penyimpanan, kontak, kalender, bluetooth.
+      - Aplikasi wajib menetapkan kategori izin yang diperlukan sesuai dengan jenis data yang akan diakses.
+      - Aplikasi wajib meminta izin pengguna sebelum mengakses data pribadi pengguna.
+      - Aplikasi wajib memberikan informasi kepada pengguna tentang data apa yang dikumpulkan dan bagaimana data tersebut digunakan.
+      - Aplikasi wajib memberikan informasi kepada pengguna tentang bagaimana data tersebut disimpan dan bagaimana data tersebut dihapus.
     - **Error Handling dan Logging**:
       - Generic error messages untuk pengguna dan detailed error log di server untuk debugging (Bab 5.9.2).
       - Masking informasi sensitif dalam log dan error messages.
-    - **Keamanan Logika Bisnis (OWASP ASVS V11)**:
-      - **Sekuensial Alur Kerja**: Memastikan aplikasi hanya memproses alur logika bisnis dalam urutan langkah yang benar dan mencegah bypass tahapan.
-      - **Waktu Proses Realistis**: Validasi bahwa setiap langkah transaksi diproses dalam waktu yang wajar bagi manusia untuk mencegah otomatisasi transaksi yang terlalu cepat (anti-bot).
-      - **Batasan Operasional**: Implementasi validasi logika terhadap risiko bisnis (misal: limit nominal, kuota transaksi) berdasarkan hasil *threat modeling*.
-      - **Integritas Alur**: Verifikasi integritas data dan parameter di setiap tahapan alur bisnis guna mencegah manipulasi nilai antar langkah.
+    - **Keamanan Logika Bisnis**:
+      - Memastikan aplikasi hanya memproses alur logika bisnis dalam urutan langkah yang benar dan mencegah bypass tahapan.
+      - Validasi bahwa setiap langkah transaksi diproses dalam waktu yang wajar bagi manusia untuk mencegah otomatisasi transaksi yang terlalu cepat (anti-bot). Dapat menggunakan fitur rate-limiting maupun captcha untuk membatasi anti-otomatisasi.
+      - Implementasi validasi logika terhadap risiko bisnis (misal: limit nominal, kuota transaksi) berdasarkan hasil *threat modeling*.
+      - Verifikasi integritas data dan parameter di setiap tahapan alur bisnis guna mencegah manipulasi nilai antar langkah.
+      - Aplikasi wajib memiliki akses dan tampilan administrator untuk mengelola.
+      - Aplikasi wajib untuk menghapus data sensitif dari memori setelah selesai digunakan.
+      - Tidak diizinkan menggunakan fitur/fungsi berbahaya pada aplikasi seperti eval, exec dan fitur dinamis berbahaya lainnya.
+      - Setiap fitur, dokumentasi, sampel dan konfigurasi yang yang tidak diperlukan wajib dihapus.
 
 3. **Fase Testing**
-   - **Static Application Security Testing (SAST)**: Code review otomatis (SonarQube, Fortify, dll.) dan manual security code review terintegrasi dalam CI/CD pipeline.
+   - **Static Application Security Testing (SAST)**: Code review otomatis (Deepsource, SonarQube, Fortify, dll.) dan manual security code review terintegrasi dalam CI/CD pipeline.
    - **Software Composition Analysis (SCA)**: Scanning dependency/library pihak ketiga terhadap kerentanan yang diketahui (Bab 5.9.4).
    - **Dynamic Application Security Testing (DAST)**: Penetration testing (Burp Suite, OWASP ZAP) dan fuzz testing sebelum go-live.
    - **Security Assessment**: Aplikasi kategori Tinggi dan Strategis wajib melalui security assessment komprehensif.
 
 4. **Fase Deployment dan Maintenance**
-   - **Hardening Environment**: Konfigurasi aman pada production (Bab 5.9.1), me-nonaktifkan debug mode, dan implementasi Web Application Firewall (WAF) (Bab 5.5.5).
+   - **Hardening Environment**: Konfigurasi aman pada production (Bab 5.9.1), me-nonaktifkan debug mode, dan implementasi Web Application Firewall (WAF) (Bab 5.5.5). Layanan lainnya yang tidak digunakan wajib untuk dinonaktifkan (contoh: aplikasi web hanya port 80 dan 443 yang dibuka, layanan database tidak dibuka ke publik).
    - **Operational Monitoring**: 
      - Monitoring keamanan infrastruktur aplikasi secara real-time merujuk pada **Bab 5.9.2.2**.
      - Pemantauan anomali di level platform (misal: lonjakan CPU, unauthorized access to files).
@@ -1239,18 +1255,42 @@ Standar operasional logging dan pemantauan aplikasi mobile wajib merujuk pada ke
 Sistem integrasi (Sistem Penghubung Layanan) mengelola aliran data antar aplikasi SPBE dengan standar keamanan sebagai berikut:
 
 1.  **Arsitektur dan Desain Keamanan API**
-    -   **API-First Approach**: Seluruh integrasi menggunakan REST API yang terstandarisasi.
-    -   **API Gateway**: Penempatan API Gateway sebagai titik masuk tunggal untuk mengelola autentikasi, rate limiting, dan logging traffic API.
-    -   **Versioning**: Penggunaan versi pada API untuk menjaga kompatibilitas dan memudahkan kontrol perubahan.
+    -   Seluruh integrasi sistem menggunakan REST API yang terstandarisasi dengan mengacu pada standar kode status HTTP. Berikut adalah standar umum status kode yang digunakan dalam REST API:
+           - 2xx — Success
+             - 200 OK : Permintaan berhasil diproses.
+             - 201 Created : Data berhasil dibuat.
+             - 204 No Content : Permintaan berhasil, tanpa konten yang dikembalikan.
+           - 3xx — Redirection
+             - 301 Moved Permanently : Resource telah dipindahkan secara permanen.
+             - 302 Found : Redirect sementara.
+             - 304 Not Modified : Data tidak berubah (biasanya untuk caching).
+             - 307 Temporary Redirect : Redirect sementara tanpa mengubah metode HTTP
+           - 4xx — Client Error
+             - 400 Bad Request : Permintaan tidak valid / format salah.
+             - 401 Unauthorized : Autentikasi diperlukan atau token tidak valid.
+             - 403 Forbidden : Akses ditolak meskipun sudah terautentikasi.
+             - 404 Not Found : Resource tidak ditemukan.
+             - 409 Conflict : Terjadi konflik data.
+             - 419 Authentication Timeout / Expired : Sesi atau token telah kedaluwarsa.
+             - 422 Unprocessable Entity : Terjadi kesalahan validasi data.
+           - 5xx — Server Error
+             - 500 Internal Server Error : Terjadi kesalahan pada server.
+             - 502 Bad Gateway : Server menerima respons tidak valid dari upstream.
+             - 503 Service Unavailable : Layanan sedang tidak tersedia.
+             - 504 Gateway Timeout : Server upstream tidak merespons tepat waktu.
+    -   Penempatan API Gateway sebagai titik masuk tunggal untuk mengelola autentikasi, rate limiting, dan logging traffic API.
+    -   Penggunaan versi pada API untuk menjaga kompatibilitas dan memudahkan kontrol perubahan.
 2.  **Kontrol Akses dan Autentikasi API**
-    -   **Autentikasi Aplikasi (m2m)**: Penggunaan OAuth 2.0, JWT, atau mTLS untuk komunikasi antar sistem.
-    -   **Manajemen Secrets**: Penyimpanan API key dan sertifikat dalam *secrets manager* terenkripsi (Bab 5.8.1).
+    -   Penggunaan OAuth 2.0, JWT, atau mTLS untuk komunikasi antar sistem.
+    -   Penyimpanan API key dan sertifikat dalam *secrets manager* terenkripsi (Bab 5.8.1).
+    -   Otorisasi pengguna wajib disesuaikan berdasarkan role dan akses yang dimiliki.
 3.  **Keamanan Data Integrasi**
-    -   **Enkripsi in Transit**: Wajib menggunakan HTTPS/TLS 1.2+ untuk seluruh jalur komunikasi data.
-    -   **Data Masking**: Implementasi masking pada response API untuk data sensitif (Bab 5.8.3).
+    -   Wajib menggunakan HTTPS/TLS 1.2+ untuk seluruh jalur komunikasi data.
+    -   Implementasi masking pada response API untuk data sensitif (Bab 5.8.3).
 4.  **Validasi dan Proteksi API**
-    -   **Input Validation**: Validasi ketat terhadap seluruh parameter request di level Gateway dan Backend.
-    -   **Rate Limiting API**: Pembatasan jumlah request per aplikasi klien untuk mencegah penyalahgunaan dan serangan DoS tingkat aplikasi.
+    -   Validasi ketat terhadap seluruh parameter request di level Gateway dan Backend.
+    -   Pembatasan jumlah request per aplikasi klien untuk mencegah penyalahgunaan dan serangan DoS tingkat aplikasi.
+    -   API tidak menampilkan informasi apapun yang berpotensi sebagai celah keamananan.
 5.  **Monitoring dan Audit Trail API**
     -   Standar logging API merujuk pada **Bab 5.9.2.2**.
     -   Pencatatan spesifik mencakup: *source IP*, *endpoint target*, *response status*, dan *payload size*.
@@ -1282,7 +1322,7 @@ Tabel Ketentuan Autentikasi dan Kebijakan Password
 | Panjang minimum kata sandi                       | 8                                 | 10–12                            | 12–15                                                   |
 | Usia maksimal kata sandi (hari)                  | 180                               | 120                              | 90                                                      |
 | Percobaan gagal sebelum lockout                  | 20                                | 10                               | 5                                                       |
-| Durasi lockout (menit)                           | 480                               | 120                              | 60                                                      |
+| Durasi lockout (menit)                           | 20                               | 30                              | 60                                                      |
 | Peringatan sebelum kadaluarsa (hari)             | 14                                | 14                               | 14                                                      |
 | Autentikasi multifaktor (MFA)                    | Opsional                          | Disarankan                       | Wajib atau bisa diterapkan                              |
 | Usia minimum password untuk reset (hari)         | 0                                 | 0                                | 0                                                       |
@@ -1322,7 +1362,7 @@ Enkripsi data diterapkan untuk melindungi kerahasiaan informasi sensitif baik da
 1. Kewajiban penggunaan enkripsi data  
    - Semua data sensitif, rahasia, terbatas dan setiap jenis data pribadi wajib dienkripsi.  
    - Penetapan klasifikasi data yang memerlukan enkripsi:  
-     * Wajib Enkripsi: Data pribadi, data keuangan, data kesehatan, kredensial  
+     * Wajib Enkripsi: Data pribadi, data keuangan, data kesehatan, kredensial  (password dsb)
      * Disarankan Enkripsi: Data internal strategis, komunikasi resmi  
      * Opsional: Data publik  
 2. Enkripsi Data at Rest  
@@ -1330,7 +1370,9 @@ Enkripsi data diterapkan untuk melindungi kerahasiaan informasi sensitif baik da
    - File Storage: Enkripsi filesystem (BitLocker, LUKS, EFS) atau enkripsi di sisi tiap aplikasi *(application-level encryption).*  
    - Backup Media: Enkripsi penuh untuk tape, disk, cloud backup  
 3. Enkripsi Data in Transit  
-   - TLS versi 1.2 atau versi 1.3 untuk jalur komunikasi web, HTTPS wajib untuk semua aplikasi web.  
+   - TLS versi 1.2 atau versi 1.3 untuk jalur komunikasi web, HTTPS wajib untuk semua aplikasi web. TLS versi 1.1 kebawah/deprecated wajib dinonaktifkan. 
+   - TLS untuk semua subdomain mojokertokota.go.id difasilitasi oleh Dinas Kominfo Kota Mojokerto dan wajib diterapkan untuk semua aplikasi publik. 
+   - Verifikasi TLS dilakukan menggunakan tools ssllabs.com dengan kriteria hasil hanya TLS terbaru yang diaktifkan dan tidak ada celah keamanan. 
    - L2TP / IPsec / SSL VPN untuk akses remote dengan enkripsi end-to-end.  
    - API menggunakan mutual TLS (mTLS) untuk komunikasi *service-to-service.*  
    - PGP untuk email yang berisi tentang data sensitif.  
@@ -1545,6 +1587,7 @@ Layanan SPBE wajib menerapkan mekanisme logging yang sistematis sebagai sumber d
 2. **Penyimpanan dan Retensi**  
    * **Penyimpanan Terpusat**: Log harus dikirim ke server SIEM atau log management terpusat secara real-time.
    * **Retensi**: Log operasional disimpan minimal **2 bulan** untuk memenuhi kebutuhan audit kepatuhan dan forensik digital.
+   * **Enkripsi**: Log yang mengandung informasi sensitif atau dikirim antar zona jaringan wajib dienkripsi.
 3. **Keamanan dan Integritas Log**  
    * **Proteksi Akses**: Akses terhadap log dibatasi secara ketat hanya untuk personel yang berwenang (administrator log/auditor).
    * **Integritas**: Menggunakan mekanisme *write-once* atau proteksi file log dengan hashing untuk mencegah modifikasi atau penghapusan jejak audit.
@@ -1778,6 +1821,7 @@ Backup dan pemulihan data dilakukan untuk menjamin ketersediaan informasi dalam 
 2. **Keamanan Backup**  
    * Semua backup wajib dienkripsi.  
    * Penyimpanan media backup memiliki kontrol fisik dan akses terbatas.  
+   * Pertukaran, penghapusan dan ekspor data backup antar lokasi harus dilakukan dengan prosedur yang aman dengan mempertimbangkan informasi yang dikecualikan.  
 3. **Pengujian Pemulihan**  
    * Uji restore dilakukan minimal 1 (satu) kali dalam **12 (dua belas) bulan** .  
    * Hasil uji dicatat sebagai bukti efektivitas kontrol.

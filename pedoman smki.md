@@ -1058,7 +1058,17 @@ Penerapan SSDLC mengintegrasikan kontrol keamanan di setiap tahap development se
 
 2. **Fase Development**
    Implementasi kontrol keamanan dalam pengembangan aplikasi mencakup:
-   - **Secure Coding Practices**: Mengikuti standar OWASP Top 10 dan menggunakan framework keamanan serta library yang telah diaudit.
+   - **Secure Coding Practices**: Mengikuti standar OWASP Top 10 dan menggunakan framework keamanan serta library yang telah diaudit. 10 Risiko Utama berdasarkan OWASP Top 10:
+     - Broken Access Control – Kegagalan pembatasan hak akses.
+     - Cryptographic Failures – Perlindungan data sensitif tidak memadai.
+     - Injection – Input tidak divalidasi (mis. SQL Injection).
+     - Insecure Design – Desain sistem tidak mempertimbangkan keamanan.
+     - Security Misconfiguration – Konfigurasi server/aplikasi tidak aman.
+     - Vulnerable Components – Menggunakan library/framework rentan.
+     - Authentication Failures – Masalah pada login & manajemen sesi.
+     - Software/Data Integrity Failures – Integritas kode atau update tidak terverifikasi.
+     - Insufficient Logging & Monitoring – Serangan tidak terdeteksi.
+     - SSRF – Server dipaksa mengakses resource internal.
    - **Autentikasi dan Manajemen Sesi**:
      - Penerapan multi-factor authentication (MFA) untuk akun administratif dan akun sensitif sesuai kebijakan pada **Bab 5.7.2 (Manajemen Kata Sandi & Autentikasi)**.  
      - Terdapat proses untuk siklus hidup autentikasi (registrasi, login, logout, reset password, dll). Verifikasi autentikasi dilakukan pada sisi server.   
@@ -1110,9 +1120,9 @@ Penerapan SSDLC mengintegrasikan kontrol keamanan di setiap tahap development se
       - Setiap fitur, dokumentasi, sampel dan konfigurasi yang yang tidak diperlukan wajib dihapus.
 
 3. **Fase Testing**
-   - **Static Application Security Testing (SAST)**: Code review otomatis (Deepsource, SonarQube, Fortify, dll.) dan manual security code review terintegrasi dalam CI/CD pipeline.
+   - **Static Application Security Testing (SAST)**: reviu kode secara otomatis menggunakan tools seperti Deepsource, SonarQube, Fortify dan jika diperlukan manual security code review terintegrasi dalam CI/CD pipeline.
    - **Software Composition Analysis (SCA)**: Scanning dependency/library pihak ketiga terhadap kerentanan yang diketahui (Bab 5.9.4).
-   - **Dynamic Application Security Testing (DAST)**: Penetration testing (Burp Suite, OWASP ZAP) dan fuzz testing sebelum go-live.
+   - **Dynamic Application Security Testing (DAST)**: Penetration testing menggunakan tool seperti Burp Suite, OWASP ZAP dan fuzz testing sebelum diterapkan kesistem produksi.
    - **Security Assessment**: Aplikasi kategori Tinggi dan Strategis wajib melalui security assessment komprehensif.
 
 4. **Fase Deployment dan Maintenance**
